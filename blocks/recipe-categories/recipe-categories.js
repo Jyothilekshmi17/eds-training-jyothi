@@ -16,7 +16,7 @@ export default function decorate(block) {
   const currentCategory = params.get('category') || 'all';
 
   buttons.forEach((button) => {
-    const category = button.dataset.category;
+    const { category } = button.dataset;
 
     if (category === currentCategory) {
       button.classList.add('active');
