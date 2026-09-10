@@ -39,7 +39,7 @@
   opacity: 0.85;
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px) {
   .recipe-search-container {
     flex-direction: column;
   }

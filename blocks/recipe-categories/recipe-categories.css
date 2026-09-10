@@ -22,7 +22,7 @@
   background: #f2f2f2;
 }
 
-@media (max-width: 600px) {
+@media (width <= 600px){
   .recipe-categories-container {
     gap: 8px;
   }
