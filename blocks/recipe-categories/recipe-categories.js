@@ -14,7 +14,7 @@ export default function decorate(block) {
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
-      const category = button.dataset.category;
+      const { category } = button.dataset;
 
       window.location.href = `/recipes?category=${encodeURIComponent(category)}`;
     });
