@@ -323,3 +323,39 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+/* Recipe Finder - Site Layout */
+
+main {
+  width: 100%;
+}
+
+main .section > div {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+main .section {
+  margin: 0;
+  padding: 32px 0;
+}
+
+body {
+  margin: 0;
+  background: #fff;
+}
+
+h1 {
+  font-size: 48px;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 32px;
+  margin-top: 0;
+}
+
+p {
+  line-height: 1.6;
+}
