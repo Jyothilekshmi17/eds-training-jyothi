@@ -479,7 +479,6 @@ body {
 }
 
 main,
-main > div,
 main > .section,
 main > .section > div {
   box-sizing: border-box;
