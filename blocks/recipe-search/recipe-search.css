@@ -30,7 +30,7 @@
   border: 0;
   border-radius: 8px;
   background: var(--text-color);
-  color: rgb(14, 14, 14);
+  color: rgb(244 123 32 / 12%);
   cursor: pointer;
   font-weight: 600;
 }
