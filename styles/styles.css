@@ -185,6 +185,10 @@ main > div {
   margin: 40px 16px;
 }
 
+main > .section:first-of-type {
+  margin-top: 0;
+}
+
 main > .section {
   position: relative;
   margin: 0;
@@ -197,10 +201,6 @@ main > .section > div {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
-}
-
-main > .section:first-of-type {
-  margin-top: 0;
 }
 
 @media (width >= 900px) {
