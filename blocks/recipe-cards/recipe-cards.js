@@ -1,7 +1,5 @@
 export default function decorate(block) {
   const rows = [...block.children];
-
-  // Remove the header row
   rows.shift();
 
   const cardsContainer = document.createElement('div');
@@ -43,3 +41,4 @@ export default function decorate(block) {
   block.innerHTML = '';
   block.append(cardsContainer);
 }
+

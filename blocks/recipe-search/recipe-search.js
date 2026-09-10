@@ -1,5 +1,3 @@
-
-
 export default function decorate(block) {
   block.innerHTML = `
     <div class="recipe-search-container">
