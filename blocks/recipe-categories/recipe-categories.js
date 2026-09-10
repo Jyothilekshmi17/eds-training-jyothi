@@ -1,6 +1,5 @@
 export default function decorate(block) {
-  block.innerHTML = `
-    <div class="recipe-categories-container">
+  block.innerHTML = `<div class="recipe-categories-container">
       <button data-category="all">All</button>
       <button data-category="breakfast">Breakfast</button>
       <button data-category="lunch">Lunch</button>
@@ -17,8 +16,7 @@ export default function decorate(block) {
     button.addEventListener('click', () => {
       const category = button.dataset.category;
 
-      window.location.href =
-        `/recipes?category=${encodeURIComponent(category)}`;
+      window.location.href = `/recipes?category=${encodeURIComponent(category)}`;
     });
   });
 }

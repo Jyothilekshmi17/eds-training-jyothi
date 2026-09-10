@@ -1,6 +1,5 @@
 export default function decorate(block) {
-  block.innerHTML = `
-    <div class="recipe-search-container">
+  block.innerHTML = `<div class="recipe-search-container">
       <input
         class="recipe-search-input"
         type="search"
@@ -28,8 +27,7 @@ export default function decorate(block) {
       return;
     }
 
-    window.location.href =
-      `/search?q=${encodeURIComponent(query)}`;
+    window.location.href = `/search?q=${encodeURIComponent(query)}`;
   };
 
   button.addEventListener('click', search);

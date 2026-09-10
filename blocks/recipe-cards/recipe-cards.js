@@ -17,8 +17,7 @@ export default function decorate(block) {
     const card = document.createElement('div');
     card.className = 'recipe-card';
 
-    card.innerHTML = `
-      <div class="recipe-card-image">
+    card.innerHTML = `<div class="recipe-card-image">
         ${image ? image.outerHTML : ''}
       </div>
 
@@ -41,4 +40,3 @@ export default function decorate(block) {
   block.innerHTML = '';
   block.append(cardsContainer);
 }
-
