@@ -2,14 +2,10 @@
   margin: 40px 0;
 }
 
-.recipe-cards > div {
+.recipe-cards-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-}
-
-.recipe-cards > div > div {
-  min-width: 0;
 }
 
 .recipe-card {
@@ -68,13 +64,13 @@
 }
 
 @media (max-width: 900px) {
-  .recipe-cards > div {
+  .recipe-cards-container {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
-  .recipe-cards > div {
+  .recipe-cards-container {
     grid-template-columns: 1fr;
   }
 }
