@@ -1,50 +1,22 @@
 .recipe-search {
   width: 100%;
-  margin: 32px 0;
-  display: flex;
-  justify-content: center;
 }
 
 .recipe-search-container {
-  display: flex;
   width: 100%;
-  max-width: 800px;
-  gap: 12px;
+  max-width: 760px;
   margin: 0 auto;
 }
 
 .recipe-search-input {
   flex: 1;
-  min-width: 0;
-  padding: 14px 18px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  font-size: 16px;
-  background: #fff;
-  box-sizing: border-box;
-}
-
-.recipe-search-input:focus {
-  outline: 2px solid var(--secondary-color);
-  outline-offset: 2px;
 }
 
 .recipe-search-button {
   flex-shrink: 0;
-  padding: 14px 28px;
-  border: 0;
-  border-radius: 8px;
-  background: var(--text-color);
-  color: #fff;
-  cursor: pointer;
-  font-weight: 600;
 }
 
-.recipe-search-button:hover {
-  opacity: 0.85;
-}
-
-@media (width <= 600px) {
+@media (width < 600px) {
   .recipe-search-container {
     flex-direction: column;
   }

@@ -1,7 +1,5 @@
 .recipe-cards {
   width: 100%;
-  margin: 40px 0;
-  box-sizing: border-box;
 }
 
 .recipe-cards-container {
@@ -14,17 +12,27 @@
 }
 
 .recipe-card {
+  display: flex;
   min-width: 0;
+  flex-direction: column;
   overflow: hidden;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
+  border: 1px solid #e8dfd2;
+  border-radius: 14px;
   background: #fff;
-  box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+  box-shadow: 0 6px 20px rgb(50 40 20 / 8%);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgb(50 40 20 / 14%);
 }
 
 .recipe-card-image {
   width: 100%;
-  height: 200px;
+  height: 210px;
   overflow: hidden;
 }
 
@@ -36,55 +44,71 @@
 }
 
 .recipe-card-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   padding: 18px;
 }
 
 .recipe-card-category {
-  margin-bottom: 8px;
-  font-size: 13px;
-  font-weight: 600;
+  margin-bottom: 7px;
+  color: #4f8a4c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
-  color: var(--secondary-color);
 }
 
 .recipe-card-title {
   margin: 0 0 10px;
-  font-size: 21px;
+  color: #263126;
+  font-size: 23px;
+  line-height: 1.2;
 }
 
 .recipe-card-time {
-  margin: 0 0 16px;
+  margin: 0 0 18px;
+  color: #737970;
   font-size: 14px;
 }
 
 .recipe-card-button {
-  display: inline-block;
-  padding: 10px 16px;
-  border-radius: 6px;
-  background: var(--text-color);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  margin-top: auto;
+  border-radius: 8px;
+  padding: 9px 16px;
+  background: #263126;
   color: #fff;
-  text-decoration: none;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .recipe-card-button:hover {
-  opacity: 0.85;
+  background: #4f8a4c;
+  color: #fff;
 }
 
 .no-recipes {
   grid-column: 1 / -1;
+  padding: 50px 20px;
   text-align: center;
-  padding: 40px 20px;
 }
 
-@media (width <= 900px) {
+@media (width >= 600px) and (width < 900px) {
   .recipe-cards-container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (width <= 600px) {
+@media (width < 600px) {
   .recipe-cards-container {
     grid-template-columns: 1fr;
+  }
+
+  .recipe-card-image {
+    height: 220px;
   }
 }

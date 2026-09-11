@@ -1,44 +1,38 @@
 /*
  * Copyright 2020 Adobe. All rights reserved.
- * This file is licensed to you under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR REPRESENTATIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Licensed under the Apache License, Version 2.0.
  */
 
 :root {
   --background-color: #fffaf3;
-  --light-color: #fff3df;
-  --dark-color: #2f3e2f;
-  --text-color: #263126;
+  --surface-color: #fff;
+  --surface-soft: #fff3df;
+  --dark-color: #263126;
+  --text-color: #3d443d;
+  --muted-color: #737970;
   --primary-color: #f47b20;
   --primary-hover: #d95f0b;
   --secondary-color: #4f8a4c;
   --secondary-hover: #3d713a;
   --accent-color: #ffc857;
-  --link-color: #4f8a4c;
-  --link-hover-color: #356333;
-  --card-background: #fff;
-  --border-color: #eadfce;
-  --shadow: 0 8px 24px rgb(50 40 20 / 10%);
-  --shadow-hover: 0 14px 32px rgb(50 40 20 / 16%);
+  --border-color: #e8dfd2;
+  --shadow: 0 6px 20px rgb(50 40 20 / 8%);
+  --shadow-hover: 0 12px 28px rgb(50 40 20 / 14%);
+
   --body-font-family: roboto, roboto-fallback, sans-serif;
   --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
+
+  --heading-font-size-xxl: 48px;
+  --heading-font-size-xl: 38px;
+  --heading-font-size-l: 30px;
+  --heading-font-size-m: 24px;
+  --heading-font-size-s: 21px;
+
+  --content-width: 1100px;
   --nav-height: 72px;
 }
 
@@ -54,29 +48,22 @@
   src: local("Arial");
 }
 
-@media (width >= 900px) {
-  :root {
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-    --heading-font-size-xxl: 48px;
-    --heading-font-size-xl: 38px;
-    --heading-font-size-l: 30px;
-    --heading-font-size-m: 24px;
-    --heading-font-size-s: 21px;
-    --heading-font-size-xs: 18px;
-  }
+/* =========================
+   BASE
+   ========================= */
+
+* {
+  box-sizing: border-box;
 }
 
-/* =========================
-   BODY
-   ========================= */
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   display: none;
   margin: 0;
-  padding: 0;
-  background-color: var(--background-color);
+  background: var(--background-color);
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
@@ -116,13 +103,12 @@ h3,
 h4,
 h5,
 h6 {
-  margin-top: 0.8em;
-  margin-bottom: 0.3em;
+  margin-top: 0;
+  margin-bottom: 16px;
   color: var(--dark-color);
   font-family: var(--heading-font-family);
   font-weight: 700;
   line-height: 1.2;
-  scroll-margin: 40px;
 }
 
 h1 {
@@ -145,78 +131,10 @@ h5 {
   font-size: var(--heading-font-size-s);
 }
 
-h6 {
-  font-size: var(--heading-font-size-xs);
-}
-
-/* =========================
-   TEXT
-   ========================= */
-
-p,
-dl,
-ol,
-ul,
-pre,
-blockquote {
-  margin-top: 0.8em;
-  margin-bottom: 0.5em;
-}
-
 p {
-  line-height: 1.65;
-}
-
-code,
-pre {
-  font-size: var(--body-font-size-s);
-}
-
-pre {
-  padding: 16px;
-  border-radius: 12px;
-  background-color: var(--light-color);
-  overflow-x: auto;
-  white-space: pre;
-}
-
-/* =========================
-   MAIN LAYOUT
-   ========================= */
-
-main {
-  width: 100%;
-  overflow: hidden;
-}
-
-main > div {
-  margin: 40px 16px;
-}
-
-main > .section {
-  position: relative;
-  width: 100%;
-  margin: 0;
-  padding: 56px 0;
-}
-
-main > .section > div {
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-main > .section:first-of-type {
   margin-top: 0;
-}
-
-main .section.light,
-main .section.highlight {
-  margin: 0;
-  padding: 64px 0;
-  background-color: var(--light-color);
+  margin-bottom: 16px;
+  line-height: 1.6;
 }
 
 /* =========================
@@ -226,136 +144,60 @@ main .section.highlight {
 a:any-link {
   color: var(--link-color);
   text-decoration: none;
-  overflow-wrap: break-word;
-  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 a:hover {
-  color: var(--link-hover-color);
-  text-decoration: none;
+  color: var(--secondary-hover);
 }
 
 /* =========================
-   BUTTONS
+   MAIN
    ========================= */
 
-p.button-wrapper {
-  margin: 16px 0;
-}
-
-a.button:any-link,
-button.button {
-  box-sizing: border-box;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  max-width: 100%;
-  margin: 0;
-  border: 2px solid transparent;
-  border-radius: 30px;
-  padding: 11px 24px;
-  font: inherit;
-  font-weight: 600;
-  line-height: 1.25;
-  text-decoration: none;
-  cursor: pointer;
+main {
+  width: 100%;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
 }
 
-a.button[aria-disabled="true"],
-button.button:disabled {
-  cursor: not-allowed;
-  pointer-events: none;
+/*
+ * Every section uses the same content width.
+ */
+
+main > .section {
+  width: 100%;
+  margin: 0;
+  padding: 48px 0;
 }
 
-a.button.primary,
-button.button.primary {
-  border-color: var(--primary-color);
+main > .section > div {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Alternating subtle background */
+
+main > .section:nth-child(even) {
+  background-color: #fffdf9;
+}
+
+/* =========================
+   SECTION HEADINGS
+   ========================= */
+
+main .section h2 {
+  margin-bottom: 28px;
+}
+
+main .section h2::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin-top: 10px;
+  border-radius: 4px;
   background-color: var(--primary-color);
-  color: #fff;
-  box-shadow: 0 5px 14px rgb(244 123 32 / 20%);
-}
-
-a.button.primary:hover,
-a.button.primary:focus-visible,
-button.button.primary:hover,
-button.button.primary:focus-visible {
-  border-color: var(--primary-hover);
-  background-color: var(--primary-hover);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgb(244 123 32 / 25%);
-}
-
-a.button.secondary,
-button.button.secondary {
-  border-color: var(--secondary-color);
-  background-color: transparent;
-  color: var(--secondary-color);
-}
-
-a.button.secondary:hover,
-a.button.secondary:focus-visible,
-button.button.secondary:hover,
-button.button.secondary:focus-visible {
-  border-color: var(--secondary-color);
-  background-color: var(--secondary-color);
-  color: #fff;
-  text-decoration: none;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgb(79 138 76 / 20%);
-}
-
-a.button.accent,
-button.button.accent {
-  border-color: var(--secondary-color);
-  background-color: var(--secondary-color);
-  color: #fff;
-  box-shadow: 0 5px 14px rgb(79 138 76 / 20%);
-}
-
-a.button.accent:hover,
-a.button.accent:focus-visible,
-button.button.accent:hover,
-button.button.accent:focus-visible {
-  border-color: var(--secondary-hover);
-  background-color: var(--secondary-hover);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgb(79 138 76 / 25%);
-}
-
-a.button.primary[aria-disabled="true"],
-a.button.primary[aria-disabled="true"]:hover,
-a.button.primary[aria-disabled="true"]:focus-visible,
-button.button.primary:disabled,
-button.button.primary:disabled:hover,
-button.button.primary:disabled:focus-visible,
-a.button.secondary[aria-disabled="true"],
-a.button.secondary[aria-disabled="true"]:hover,
-a.button.secondary[aria-disabled="true"]:focus-visible,
-button.button.secondary:disabled,
-button.button.secondary:disabled:hover,
-button.button.secondary:disabled:focus-visible,
-a.button.accent[aria-disabled="true"],
-a.button.accent[aria-disabled="true"]:hover,
-a.button.accent[aria-disabled="true"]:focus-visible,
-button.button.accent:disabled,
-button.button.accent:disabled:hover,
-button.button.accent:disabled:focus-visible {
-  border-color: #ddd;
-  background-color: #eee;
-  color: #999;
-  box-shadow: none;
-  transform: none;
 }
 
 /* =========================
@@ -365,64 +207,7 @@ button.button.accent:disabled:focus-visible {
 main img {
   display: block;
   max-width: 100%;
-  width: auto;
   height: auto;
-}
-
-.icon {
-  display: inline-block;
-  width: 24px;
-  height: 24px;
-}
-
-.icon img {
-  width: 100%;
-  height: 100%;
-}
-
-/* =========================
-   CARDS
-   ========================= */
-
-.card {
-  box-sizing: border-box;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
-  border-radius: 18px;
-  background-color: var(--card-background);
-  box-shadow: var(--shadow);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
-}
-
-.card:hover {
-  border-color: #dfc9aa;
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-}
-
-.card img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-main .section h2 {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 24px;
-}
-
-main .section h2::after {
-  content: "";
-  display: block;
-  width: 55px;
-  height: 4px;
-  margin-top: 10px;
-  border-radius: 5px;
-  background-color: var(--primary-color);
 }
 
 /* =========================
@@ -439,116 +224,119 @@ button {
 input,
 textarea,
 select {
-  box-sizing: border-box;
   width: 100%;
   border: 1px solid var(--border-color);
   border-radius: 10px;
   padding: 12px 14px;
   background-color: #fff;
   color: var(--text-color);
-  outline: none;
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
   border-color: var(--primary-color);
+  outline: none;
   box-shadow: 0 0 0 3px rgb(244 123 32 / 12%);
 }
 
-input[type="search"] {
-  border-radius: 30px;
-  padding: 13px 20px;
-  background-color: #fff;
-  box-shadow: 0 4px 15px rgb(50 40 20 / 8%);
-}
+/* =========================
+   BUTTONS
+   ========================= */
 
-input[type="search"]:focus {
-  border-color: var(--primary-color);
-  box-shadow:
-    0 4px 15px rgb(50 40 20 / 8%),
-    0 0 0 3px rgb(244 123 32 / 12%);
+button {
+  cursor: pointer;
 }
 
 /* =========================
-   RECIPE FINDER
+   RECIPE SEARCH
    ========================= */
 
-.recipe-search,
-.recipe-categories,
-.recipe-cards {
-  box-sizing: border-box;
-  width: 100%;
-}
-
-/* Search */
-
 .recipe-search {
+  width: 100%;
   margin: 0;
-  padding: 40px 0;
+  padding: 12px 0 28px;
 }
 
 .recipe-search-container {
-  box-sizing: border-box;
   display: flex;
   width: 100%;
-  max-width: 800px;
+  max-width: 760px;
   margin: 0 auto;
-  gap: 12px;
+  gap: 10px;
 }
 
 .recipe-search-input {
   flex: 1;
   min-width: 0;
+  height: 52px;
+  border: 1px solid var(--border-color);
+  border-radius: 26px;
+  padding: 0 20px;
+  background-color: #fff;
+  box-shadow: 0 3px 12px rgb(50 40 20 / 6%);
+}
+
+.recipe-search-input:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 3px 14px rgb(50 40 20 / 8%);
 }
 
 .recipe-search-button {
+  height: 52px;
   flex-shrink: 0;
   border: 0;
-  border-radius: 8px;
-  padding: 14px 28px;
-  background-color: var(--text-color);
+  border-radius: 26px;
+  padding: 0 28px;
+  background-color: var(--secondary-color);
   color: #fff;
-  cursor: pointer;
   font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .recipe-search-button:hover {
-  opacity: 0.85;
+  background-color: var(--secondary-hover);
+  transform: translateY(-1px);
 }
 
-/* Categories */
+/* =========================
+   RECIPE CATEGORIES
+   ========================= */
 
 .recipe-categories {
+  width: 100%;
   margin: 0;
-  padding: 30px 0 50px;
+  padding: 8px 0 36px;
 }
 
 .recipe-categories-container {
   display: flex;
-  box-sizing: border-box;
   width: 100%;
-  max-width: 1100px;
+  max-width: var(--content-width);
   margin: 0 auto;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-/* Category buttons */
+/*
+ * Works with category buttons generated
+ * by the Recipe Categories block.
+ */
 
+.recipe-categories button,
 .recipe-category-button {
   border: 1px solid var(--border-color);
-  border-radius: 30px;
-  padding: 12px 22px;
+  border-radius: 24px;
+  padding: 9px 20px;
   background-color: #fff;
   color: var(--text-color);
-  cursor: pointer;
+  font-size: 15px;
   font-weight: 600;
+  cursor: pointer;
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
@@ -556,44 +344,50 @@ input[type="search"]:focus {
     transform 0.2s ease;
 }
 
+.recipe-categories button:hover,
 .recipe-category-button:hover {
   border-color: var(--secondary-color);
   background-color: var(--secondary-color);
   color: #fff;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
+.recipe-categories button.active,
 .recipe-category-button.active {
   border-color: var(--secondary-color);
   background-color: var(--secondary-color);
   color: #fff;
 }
 
-/* Recipe Cards */
+/* =========================
+   RECIPE CARDS
+   ========================= */
 
 .recipe-cards {
+  width: 100%;
   margin: 0;
-  padding: 50px 0 70px;
+  padding: 16px 0 60px;
 }
 
 .recipe-cards-container {
   display: grid;
-  box-sizing: border-box;
   width: 100%;
-  max-width: 1100px;
+  max-width: var(--content-width);
   margin: 0 auto;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+  gap: 24px;
 }
 
+/* Individual card */
+
 .recipe-card {
-  box-sizing: border-box;
-  width: 100%;
+  display: flex;
   min-width: 0;
+  flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--border-color);
   border-radius: 14px;
-  background-color: #fff;
+  background-color: var(--surface-color);
   box-shadow: var(--shadow);
   transition:
     transform 0.25s ease,
@@ -605,51 +399,70 @@ input[type="search"]:focus {
   box-shadow: var(--shadow-hover);
 }
 
+/* Card image */
+
 .recipe-card-image {
   width: 100%;
-  height: 220px;
+  height: 210px;
   overflow: hidden;
+  background-color: var(--surface-soft);
 }
 
 .recipe-card-image img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.35s ease;
 }
 
+.recipe-card:hover .recipe-card-image img {
+  transform: scale(1.03);
+}
+
+/* Card content */
+
 .recipe-card-content {
-  padding: 20px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 18px;
 }
 
 .recipe-card-category {
-  margin-bottom: 8px;
+  margin-bottom: 7px;
   color: var(--secondary-color);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.7px;
   text-transform: uppercase;
 }
 
 .recipe-card-title {
   margin: 0 0 10px;
   color: var(--dark-color);
-  font-size: 24px;
+  font-size: 23px;
+  line-height: 1.2;
 }
 
 .recipe-card-time {
   margin: 0 0 18px;
-  color: var(--text-color);
-  font-size: 15px;
+  color: var(--muted-color);
+  font-size: 14px;
 }
 
+/* Card button stays at bottom */
+
 .recipe-card-button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  margin-top: auto;
   border-radius: 8px;
-  padding: 10px 18px;
+  padding: 9px 16px;
   background-color: var(--text-color);
   color: #fff;
-  text-decoration: none;
+  font-size: 14px;
   font-weight: 600;
   transition:
     background-color 0.2s ease,
@@ -659,8 +472,10 @@ input[type="search"]:focus {
 .recipe-card-button:hover {
   background-color: var(--secondary-color);
   color: #fff;
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
+
+/* No recipes */
 
 .no-recipes {
   grid-column: 1 / -1;
@@ -669,53 +484,25 @@ input[type="search"]:focus {
 }
 
 .no-recipes h3 {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 /* =========================
-   OTHER GLOBAL STYLES
+   HERO / GENERAL CONTENT
    ========================= */
 
-.recipe-grid {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+main > .section:first-child {
+  padding-top: 52px;
+  padding-bottom: 36px;
 }
 
-main .section:nth-child(even) {
-  background-color: #fffdf9;
-}
-
-hr {
-  height: 1px;
-  margin: 32px 0;
-  border: 0;
-  background-color: var(--border-color);
-}
-
-::selection {
-  background-color: var(--accent-color);
-  color: var(--dark-color);
-}
+/* =========================
+   FOCUS
+   ========================= */
 
 :focus-visible {
   outline: 3px solid rgb(244 123 32 / 35%);
   outline-offset: 3px;
-}
-
-/* =========================
-   DESKTOP
-   ========================= */
-
-@media (width >= 900px) {
-  main > .section > div {
-    padding: 0 32px;
-  }
-
-  .recipe-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 }
 
 /* =========================
@@ -724,16 +511,11 @@ hr {
 
 @media (width >= 600px) and (width < 900px) {
   main > .section {
-    padding: 48px 0;
+    padding: 40px 0;
   }
 
-  .recipe-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-  }
-
-  .recipe-cards-container {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  main > .section > div {
+    padding: 0 20px;
   }
 
   h1 {
@@ -743,6 +525,11 @@ hr {
   h2 {
     font-size: 32px;
   }
+
+  .recipe-cards-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
 }
 
 /* =========================
@@ -750,16 +537,21 @@ hr {
    ========================= */
 
 @media (width < 600px) {
-  body {
-    font-size: var(--body-font-size-s);
+  :root {
+    --body-font-size-m: 16px;
   }
 
   main > .section {
-    padding: 40px 0;
+    padding: 32px 0;
   }
 
   main > .section > div {
     padding: 0 16px;
+  }
+
+  main > .section:first-child {
+    padding-top: 36px;
+    padding-bottom: 28px;
   }
 
   h1 {
@@ -774,29 +566,50 @@ hr {
     font-size: 24px;
   }
 
-  .recipe-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  /* Search */
+
+  .recipe-search {
+    padding: 8px 0 24px;
   }
 
   .recipe-search-container {
     flex-direction: column;
+    gap: 10px;
   }
 
+  .recipe-search-input,
   .recipe-search-button {
     width: 100%;
   }
 
+  /* Categories */
+
+  .recipe-categories {
+    padding: 4px 0 28px;
+  }
+
+  .recipe-categories-container {
+    gap: 8px;
+  }
+
+  .recipe-categories button,
+  .recipe-category-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  /* Cards */
+
+  .recipe-cards {
+    padding: 8px 0 40px;
+  }
+
   .recipe-cards-container {
     grid-template-columns: 1fr;
+    gap: 18px;
   }
 
   .recipe-card-image {
     height: 220px;
-  }
-
-  a.button:any-link,
-  button.button {
-    padding: 10px 20px;
   }
 }
