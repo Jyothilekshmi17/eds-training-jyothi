@@ -52,7 +52,7 @@
 
 .recipe-card-category {
   margin-bottom: 7px;
-  color: #4f8a4c;
+  color: #000000;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.7px;
@@ -80,15 +80,15 @@
   margin-top: auto;
   border-radius: 8px;
   padding: 9px 16px;
-  background: #4f8a4c;
+  background: #000000;
   color: #fff;
   font-size: 14px;
   font-weight: 600;
 }
 
 .recipe-card-button:hover {
- background: #4f8a4c;
-  color: #fff;
+ background: #fff;
+  color: #000000;
 }
 
 .no-recipes {
