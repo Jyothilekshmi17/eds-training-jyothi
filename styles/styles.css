@@ -518,62 +518,20 @@ hr {
     padding: 10px 20px;
   }
 }
-/* Recipe Finder page layout fix */
+/* Recipe Finder page layout */
 
-main .section {
-  width: 100%;
-}
-
-main .section > div {
-  display: block;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+.recipe-search,
+.recipe-categories,
+.recipe-cards {
   box-sizing: border-box;
-}
-
-/* Keep each recipe block on its own row */
-main .section > div > .hero,
-main .section > div > .recipe-search,
-main .section > div > .recipe-categories,
-main .section > div > .recipe-cards {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Hero */
-main .hero {
-  padding: 70px 0 40px;
-}
-
-main .hero > div {
-  display: block;
   width: 100%;
 }
 
-main .hero h1 {
-  max-width: 850px;
-  margin: 0 auto 20px;
-  text-align: center;
-  font-size: 56px;
-  line-height: 1.1;
+.recipe-search {
+  margin: 30px 0;
 }
 
-main .hero p {
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* Search */
-main .recipe-search {
-  padding: 20px 0;
-}
-
-main .recipe-search-container {
+.recipe-search-container {
   display: flex;
   width: 100%;
   max-width: 700px;
@@ -581,12 +539,11 @@ main .recipe-search-container {
   gap: 12px;
 }
 
-/* Categories */
-main .recipe-categories {
-  padding: 20px 0 40px;
+.recipe-categories {
+  margin: 30px 0 40px;
 }
 
-main .recipe-categories-container {
+.recipe-categories-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -594,42 +551,29 @@ main .recipe-categories-container {
   flex-wrap: wrap;
 }
 
-/* Recipe cards */
-main .recipe-cards {
-  padding: 30px 0;
+.recipe-cards {
+  margin: 40px 0;
 }
 
-main .recipe-cards-container {
+.recipe-cards-container {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
   width: 100%;
+  gap: 24px;
 }
 
 @media (width <= 900px) {
-  main .hero h1 {
-    font-size: 46px;
-  }
-
-  main .recipe-cards-container {
+  .recipe-cards-container {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (width <= 600px) {
-  main .hero {
-    padding: 40px 0 20px;
-  }
-
-  main .hero h1 {
-    font-size: 36px;
-  }
-
-  main .recipe-search-container {
+  .recipe-search-container {
     flex-direction: column;
   }
 
-  main .recipe-cards-container {
+  .recipe-cards-container {
     grid-template-columns: 1fr;
   }
 }
