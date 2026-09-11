@@ -1,12 +1,12 @@
 export default function decorate(block) {
-  block.innerHTML = `<div class="recipe-search-container">
+  block.innerHTML = `
+    <div class="recipe-search-container">
       <input
         class="recipe-search-input"
         type="search"
         placeholder="Search for a recipe..."
         aria-label="Search for a recipe"
       />
-
       <button
         class="recipe-search-button"
         type="button"
@@ -19,22 +19,27 @@ export default function decorate(block) {
   const input = block.querySelector('.recipe-search-input');
   const button = block.querySelector('.recipe-search-button');
 
-  const search = () => {
-    const query = input.value.trim();
+  function performSearch() {
+    const query = input.value.trim().toLowerCase();
 
-    if (!query) {
-      input.focus();
-      return;
-    }
+    document.dispatchEvent(
+      new CustomEvent('recipe-search', {
+        detail: {
+          query,
+        },
+      }),
+    );
+  }
 
-    window.location.href = `/search?q=${encodeURIComponent(query)}`;
-  };
-
-  button.addEventListener('click', search);
+  button.addEventListener('click', performSearch);
 
   input.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-      search();
+      performSearch();
     }
+  });
+
+  input.addEventListener('input', () => {
+    performSearch();
   });
 }

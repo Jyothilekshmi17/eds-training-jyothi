@@ -1,33 +1,70 @@
 export default function decorate(block) {
   block.innerHTML = `
-    <div class="recipe-categories-container">
-      <button type="button" data-category="all">All</button>
-      <button type="button" data-category="breakfast">Breakfast</button>
-      <button type="button" data-category="lunch">Lunch</button>
-      <button type="button" data-category="dinner">Dinner</button>
-      <button type="button" data-category="desserts">Desserts</button>
-      <button type="button" data-category="snacks">Snacks</button>
-      <button type="button" data-category="healthy">Healthy</button>
-    </div>
+    <div class="recipe-categories-container"></div>
   `;
 
-  const buttons = block.querySelectorAll('button');
-  const params = new URLSearchParams(window.location.search);
-  const currentCategory = params.get('category') || 'all';
+  const container = block.querySelector('.recipe-categories-container');
 
-  buttons.forEach((button) => {
-    const { category } = button.dataset;
+  let selectedCategory = 'all';
 
-    if (category === currentCategory) {
+  function getCategories() {
+    const categoryElements = document.querySelectorAll(
+      '.recipe-card-category',
+    );
+
+    const categories = [...categoryElements]
+      .map((element) => element.textContent.trim())
+      .filter(Boolean);
+
+    return [...new Set(categories)].sort();
+  }
+
+  function createButton(label, value) {
+    const button = document.createElement('button');
+
+    button.type = 'button';
+    button.className = 'recipe-category-button';
+    button.textContent = label;
+
+    if (value === selectedCategory) {
       button.classList.add('active');
     }
 
     button.addEventListener('click', () => {
-      if (category === 'all') {
-        window.location.href = '/recipes';
-      } else {
-        window.location.href = `/recipes?category=${encodeURIComponent(category)}`;
-      }
+      selectedCategory = value;
+
+      document.dispatchEvent(
+        new CustomEvent('recipe-category', {
+          detail: {
+            category: value,
+          },
+        }),
+      );
+
+      renderCategories();
     });
+
+    return button;
+  }
+
+  function renderCategories() {
+    const categories = getCategories();
+
+    container.innerHTML = '';
+
+    container.append(createButton('All', 'all'));
+
+    categories.forEach((category) => {
+      container.append(createButton(category, category));
+    });
+  }
+
+  document.addEventListener('recipe-categories-updated', () => {
+    renderCategories();
   });
+
+  renderCategories();
+
+  setTimeout(renderCategories, 300);
+  setTimeout(renderCategories, 1000);
 }
