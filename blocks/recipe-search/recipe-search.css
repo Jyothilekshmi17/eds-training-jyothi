@@ -19,18 +19,20 @@
 }
 
 /* UPDATED INPUT STYLES */
+/* UPDATED INPUT STYLES WITH FIX */
 .recipe-search-input {
   flex: 1;
   min-width: 0;
-  height: 100px !important; /* Increased height */
-  padding: 0 28px; /* Increased padding */
+  height: 64px !important;            /* Sets explicit height */
+  padding: 18px 24px !important;      /* OVERRIDES global 12px padding */
+  font-size: 18px !important;         /* Larger text inside input */
+  line-height: 1.5 !important;
   border: 1px solid #e4d7c5;
-  border-radius: 36px !important; /* Pill-shaped edges (half of height) */
+  border-radius: 32px !important;     /* Smooth pill shape */
   background: #ffffff;
   color: #29251f;
-  font-size: 20px; /* Scaled font size */
   outline: none;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
 .recipe-search-input::placeholder {
@@ -42,15 +44,15 @@
   box-shadow: 0 0 0 3px rgb(232 117 34 / 12%);
 }
 
-/* UPDATED BUTTON STYLES (MATCHED TO INPUT HEIGHT) */
+/* MATCHED BUTTON STYLES */
 .recipe-search-button {
   width: 190px;
-  height: 72px ; /* Matched to input height */
+  height: 64px !important;            /* Matches input height */
   border: none;
-  border-radius: 36px; /* Matched to input border-radius */
+  border-radius: 32px !important;     /* Matches input curve */
   background: #e87522;
   color: #ffffff;
-  font-size: 20px; /* Scaled font size */
+  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
   transition: background 0.2s ease, transform 0.2s ease;
