@@ -269,7 +269,7 @@ button {
 .recipe-search-input {
   flex: 1;
   min-width: 0;
-  height: 52px;
+  height: 100px;
   border: 1px solid var(--border-color);
   border-radius: 26px;
   padding: 0 20px;
@@ -344,20 +344,7 @@ button {
     transform 0.2s ease;
 }
 
-.recipe-categories button:hover,
-.recipe-category-button:hover {
-  border-color: var(--secondary-color);
-  background-color: var(--secondary-color);
-  color: #fff;
-  transform: translateY(-1px);
-}
 
-.recipe-categories button.active,
-.recipe-category-button.active {
-  border-color: var(--secondary-color);
-  background-color: var(--secondary-color);
-  color: #fff;
-}
 
 /* =========================
    RECIPE CARDS
