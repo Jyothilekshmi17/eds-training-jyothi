@@ -20,9 +20,7 @@
   border-radius: 14px;
   background: #fff;
   box-shadow: 0 6px 20px rgb(50 40 20 / 8%);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+  transition:transform 0.25s ease,box-shadow 0.25s ease;
 }
 
 .recipe-card:hover {
@@ -52,7 +50,7 @@
 
 .recipe-card-category {
   margin-bottom: 7px;
-  color: #000000;
+  color: #000;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.7px;
@@ -80,7 +78,7 @@
   margin-top: auto;
   border-radius: 8px;
   padding: 9px 16px;
-  background: #000000;
+  background: #000;
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -88,7 +86,7 @@
 
 .recipe-card-button:hover {
  background: #fff;
-  color: #000000;
+  color: #000;
 }
 
 .no-recipes {
