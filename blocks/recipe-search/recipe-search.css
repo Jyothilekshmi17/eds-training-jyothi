@@ -79,11 +79,13 @@
 
   .recipe-search-input {
     width: 100%;
-    height: 64px; /* Scaled height on mobile */
-    padding: 0 24px;
+    /* Scaled height on mobile */
     border-radius: 32px;
-    font-size: 18px;
+    height: 80px !important;
+    font-size: 22px !important;
+    padding: 0 28px !important;
   }
+ 
 
   .recipe-search-button {
     width: 100%;
