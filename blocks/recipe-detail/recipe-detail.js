@@ -11,17 +11,22 @@ async function getRecipeData() {
     const parser = new DOMParser();
     const documentData = parser.parseFromString(html, 'text/html');
 
-    const table = documentData.querySelector('table');
+    const block = documentData.querySelector('.recipe-data');
 
-    if (!table) {
+    if (!block) {
+      console.error('Recipe Data block not found');
       return [];
     }
 
-    const rows = [...table.querySelectorAll('tr')];
+    const rows = [...block.children];
 
-    rows.shift();
+    if (rows.length < 2) {
+      console.error('Recipe data rows not found');
+      return [];
+    }
 
     return rows
+      .slice(1)
       .map((row) => {
         const cells = [...row.children];
 
@@ -38,8 +43,7 @@ async function getRecipeData() {
           instructions: cells[7]?.textContent.trim() || '',
         };
       })
-      .filter((recipe) => recipe.id);
-
+      .filter((recipe) => recipe.id && recipe.name);
   } catch (error) {
     console.error('Recipe data error:', error);
     return [];
