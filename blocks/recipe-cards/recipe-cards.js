@@ -11,14 +11,19 @@ export default function decorate(block) {
       const name = cells[1]?.textContent.trim() || '';
       const category = cells[2]?.textContent.trim() || '';
       const time = cells[3]?.textContent.trim() || '';
-      const link = cells[4]?.querySelector('a')?.href || '#';
+
+      const id = name
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
 
       return {
         image,
+        id,
         name,
         category,
         time,
-        link,
       };
     })
     .filter((recipe) => recipe.name);
@@ -68,6 +73,7 @@ export default function decorate(block) {
     card.className = 'recipe-card';
 
     const imageContainer = document.createElement('div');
+
     imageContainer.className = 'recipe-card-image';
 
     if (recipe.image) {
@@ -75,23 +81,28 @@ export default function decorate(block) {
     }
 
     const content = document.createElement('div');
+
     content.className = 'recipe-card-content';
 
     const category = document.createElement('div');
+
     category.className = 'recipe-card-category';
     category.textContent = recipe.category;
 
     const title = document.createElement('h3');
+
     title.className = 'recipe-card-title';
     title.textContent = recipe.name;
 
     const time = document.createElement('p');
+
     time.className = 'recipe-card-time';
     time.textContent = `⏱ ${recipe.time}`;
 
     const link = document.createElement('a');
+
     link.className = 'recipe-card-button';
-    link.href = recipe.link;
+    link.href = `/recipe-detail?recipe=${encodeURIComponent(recipe.id)}`;
     link.textContent = 'View Recipe';
 
     content.append(
@@ -122,6 +133,7 @@ export default function decorate(block) {
       message.className = 'no-recipes';
 
       const heading = document.createElement('h3');
+
       heading.textContent = 'No recipes found';
 
       const text = document.createElement('p');
@@ -140,6 +152,7 @@ export default function decorate(block) {
       }
 
       message.append(heading, text);
+
       cardsContainer.append(message);
 
       return;
@@ -152,11 +165,13 @@ export default function decorate(block) {
 
   document.addEventListener('recipe-search', (event) => {
     currentSearch = event.detail.query;
+
     renderRecipes();
   });
 
   document.addEventListener('recipe-category', (event) => {
     currentCategory = event.detail.category;
+
     renderRecipes();
   });
 
