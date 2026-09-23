@@ -1,7 +1,9 @@
 .recipe-cards.block {
-  width: 100%;
+  display: block;
+  width: 100vw;
   max-width: none;
-  margin: 0;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   padding: 50px 24px 70px;
   box-sizing: border-box;
 }
@@ -16,7 +18,6 @@
   gap: 28px;
   box-sizing: border-box;
 }
-
 .recipe-card {
   display: flex;
   min-width: 0;
