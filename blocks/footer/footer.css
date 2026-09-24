@@ -1,6 +1,6 @@
 footer {
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  background-color: #2f3e2f;
+  color: #fffaf3;
   font-size: var(--body-font-size-xs);
 }
 
@@ -10,12 +10,12 @@ footer .footer > div {
   padding: 50px 24px 25px;
 }
 
-/* Main footer content */
+/* Footer content */
 footer .footer-content {
-  display: block;
+  width: 100%;
 }
 
-/* 3-column footer table */
+/* Footer table */
 footer .footer-content table {
   width: 100%;
   border-collapse: collapse;
@@ -30,87 +30,53 @@ footer .footer-content tr {
 footer .footer-content th,
 footer .footer-content td {
   border: 0;
-  padding: 0 30px 10px 0;
   text-align: left;
   vertical-align: top;
-  color: var(--light-color);
+  padding: 0 30px 10px 0;
+  color: #fffaf3;
 }
 
 /* Column headings */
 footer .footer-content th {
-  color: var(--accent-color);
+  color: #ffc857;
   font-size: 18px;
   font-weight: 700;
   padding-bottom: 16px;
 }
 
-/* Footer paragraphs */
+/* Normal text */
 footer .footer-content p {
   margin: 0 0 10px;
-  color: var(--light-color);
+  color: #fffaf3;
   line-height: 1.6;
 }
 
-/* Footer links */
+/* Links */
 footer .footer-content a {
-  color: var(--light-color);
+  color: #fffaf3;
   text-decoration: none;
-  transition: color 0.2s ease;
 }
 
 footer .footer-content a:hover {
-  color: var(--primary-color);
-  text-decoration: none;
+  color: #f47b20;
 }
 
 /* Recipe Finder title */
 footer .footer-content td:first-child p:first-child {
-  color: var(--accent-color);
+  color: #ffc857;
   font-size: 22px;
   font-weight: 700;
 }
 
-/* Bottom copyright area */
+/* Copyright */
 footer .footer-content > p:last-child {
   margin-top: 35px;
   padding-top: 20px;
   border-top: 1px solid rgb(255 255 255 / 20%);
-  color: var(--light-color);
+  color: #fffaf3;
 }
 
-footer .footer-content > p:last-child + p {
-  color: var(--light-color);
-  opacity: 0.8;
-}
-
-/* Remove unnecessary table spacing */
-footer .footer-content .table-wrapper {
-  margin: 0;
-  overflow-x: visible;
-}
-
-/* Desktop */
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 55px 32px 25px;
-  }
-
-  footer .footer-content table {
-    table-layout: fixed;
-  }
-
-  footer .footer-content th,
-  footer .footer-content td {
-    width: 33.33%;
-  }
-
-  footer .footer-content th,
-  footer .footer-content td {
-    padding-right: 45px;
-  }
-}
-
-/* Tablet and mobile */
+/* Mobile */
 @media (width < 900px) {
   footer .footer-content table,
   footer .footer-content tbody,
@@ -128,5 +94,21 @@ footer .footer-content .table-wrapper {
 
   footer .footer-content th {
     padding-top: 20px;
+  }
+}
+
+/* Desktop */
+@media (width >= 900px) {
+  footer .footer > div {
+    padding: 55px 32px 25px;
+  }
+
+  footer .footer-content table {
+    table-layout: fixed;
+  }
+
+  footer .footer-content th,
+  footer .footer-content td {
+    width: 33.33%;
   }
 }
