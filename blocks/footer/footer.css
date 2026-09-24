@@ -1,20 +1,132 @@
 footer {
-  background-color: var(--light-color);
+  background-color: var(--dark-color);
+  color: var(--light-color);
   font-size: var(--body-font-size-xs);
 }
 
 footer .footer > div {
-  margin: auto;
   max-width: 1200px;
-  padding: 40px 24px 24px;
+  margin: auto;
+  padding: 50px 24px 25px;
 }
 
-footer .footer p {
+/* Main footer content */
+footer .footer-content {
+  display: block;
+}
+
+/* 3-column footer table */
+footer .footer-content table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 0;
   margin: 0;
 }
 
+footer .footer-content tr {
+  border: 0;
+}
+
+footer .footer-content th,
+footer .footer-content td {
+  border: 0;
+  padding: 0 30px 10px 0;
+  text-align: left;
+  vertical-align: top;
+  color: var(--light-color);
+}
+
+/* Column headings */
+footer .footer-content th {
+  color: var(--accent-color);
+  font-size: 18px;
+  font-weight: 700;
+  padding-bottom: 16px;
+}
+
+/* Footer paragraphs */
+footer .footer-content p {
+  margin: 0 0 10px;
+  color: var(--light-color);
+  line-height: 1.6;
+}
+
+/* Footer links */
+footer .footer-content a {
+  color: var(--light-color);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer .footer-content a:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* Recipe Finder title */
+footer .footer-content td:first-child p:first-child {
+  color: var(--accent-color);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Bottom copyright area */
+footer .footer-content > p:last-child {
+  margin-top: 35px;
+  padding-top: 20px;
+  border-top: 1px solid rgb(255 255 255 / 20%);
+  color: var(--light-color);
+}
+
+footer .footer-content > p:last-child + p {
+  color: var(--light-color);
+  opacity: 0.8;
+}
+
+/* Remove unnecessary table spacing */
+footer .footer-content .table-wrapper {
+  margin: 0;
+  overflow-x: visible;
+}
+
+/* Desktop */
 @media (width >= 900px) {
   footer .footer > div {
-    padding: 40px 32px 24px;
+    padding: 55px 32px 25px;
+  }
+
+  footer .footer-content table {
+    table-layout: fixed;
+  }
+
+  footer .footer-content th,
+  footer .footer-content td {
+    width: 33.33%;
+  }
+
+  footer .footer-content th,
+  footer .footer-content td {
+    padding-right: 45px;
+  }
+}
+
+/* Tablet and mobile */
+@media (width < 900px) {
+  footer .footer-content table,
+  footer .footer-content tbody,
+  footer .footer-content tr {
+    display: block;
+    width: 100%;
+  }
+
+  footer .footer-content th,
+  footer .footer-content td {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  footer .footer-content th {
+    padding-top: 20px;
   }
 }
