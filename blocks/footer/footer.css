@@ -7,108 +7,117 @@ footer {
 footer .footer > div {
   max-width: 1200px;
   margin: auto;
-  padding: 50px 24px 25px;
+  padding: 55px 32px 25px;
 }
 
-/* Footer content */
 footer .footer-content {
   width: 100%;
 }
 
-/* Footer table */
+/* Remove table appearance */
 footer .footer-content table {
   width: 100%;
-  border-collapse: collapse;
   border: 0;
+  border-collapse: collapse;
   margin: 0;
 }
 
+footer .footer-content tbody {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 60px;
+}
+
 footer .footer-content tr {
+  display: contents;
   border: 0;
 }
 
 footer .footer-content th,
 footer .footer-content td {
   border: 0;
+  padding: 0;
   text-align: left;
   vertical-align: top;
-  padding: 0 30px 10px 0;
   color: #fffaf3;
 }
 
-/* Column headings */
+/* Headings */
 footer .footer-content th {
   color: #ffc857;
   font-size: 18px;
   font-weight: 700;
-  padding-bottom: 16px;
+  padding-bottom: 14px;
 }
 
-/* Normal text */
+/* Text */
 footer .footer-content p {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   color: #fffaf3;
   line-height: 1.6;
+}
+
+/* Recipe Finder title */
+footer .footer-content td:first-child p:first-child {
+  color: #ffc857;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 14px;
 }
 
 /* Links */
 footer .footer-content a {
   color: #fffaf3;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 footer .footer-content a:hover {
   color: #f47b20;
 }
 
-/* Recipe Finder title */
-footer .footer-content td:first-child p:first-child {
-  color: #ffc857;
-  font-size: 22px;
-  font-weight: 700;
+/* Bottom copyright */
+footer .footer-content > p {
+  margin: 0;
 }
 
-/* Copyright */
-footer .footer-content > p:last-child {
-  margin-top: 35px;
+footer .footer-content > p:first-of-type {
+  margin-top: 45px;
   padding-top: 20px;
   border-top: 1px solid rgb(255 255 255 / 20%);
-  color: #fffaf3;
+}
+
+footer .footer-content > p:last-of-type {
+  margin-top: 8px;
+  opacity: 0.8;
 }
 
 /* Mobile */
 @media (width < 900px) {
-  footer .footer-content table,
-  footer .footer-content tbody,
+  footer .footer > div {
+    padding: 40px 24px 20px;
+  }
+
+  footer .footer-content tbody {
+    display: block;
+  }
+
   footer .footer-content tr {
     display: block;
-    width: 100%;
   }
 
   footer .footer-content th,
   footer .footer-content td {
     display: block;
     width: 100%;
-    padding: 10px 0;
+    padding: 8px 0;
   }
 
   footer .footer-content th {
     padding-top: 20px;
   }
-}
 
-/* Desktop */
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 55px 32px 25px;
-  }
-
-  footer .footer-content table {
-    table-layout: fixed;
-  }
-
-  footer .footer-content th,
-  footer .footer-content td {
-    width: 33.33%;
+  footer .footer-content td:first-child p:first-child {
+    font-size: 22px;
   }
 }
