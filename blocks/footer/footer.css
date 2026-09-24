@@ -14,110 +14,108 @@ footer .footer-content {
   width: 100%;
 }
 
-/* Remove table appearance */
-footer .footer-content table {
-  width: 100%;
-  border: 0;
-  border-collapse: collapse;
-  margin: 0;
-}
-
-footer .footer-content tbody {
+/* Three columns */
+footer .footer-columns {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr;
-  gap: 60px;
+  gap: 70px;
 }
 
-footer .footer-content tr {
-  display: contents;
-  border: 0;
+/* Individual column */
+footer .footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-footer .footer-content th,
-footer .footer-content td {
-  border: 0;
-  padding: 0;
-  text-align: left;
-  vertical-align: top;
-  color: #fffaf3;
-}
-
-/* Headings */
-footer .footer-content th {
-  color: #ffc857;
-  font-size: 18px;
-  font-weight: 700;
-  padding-bottom: 14px;
-}
-
-/* Text */
-footer .footer-content p {
-  margin: 0 0 12px;
+/* Footer items */
+footer .footer-item {
   color: #fffaf3;
   line-height: 1.6;
 }
 
-/* Recipe Finder title */
-footer .footer-content td:first-child p:first-child {
+/* First item = column heading */
+footer .footer-column .footer-item:first-child {
   color: #ffc857;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 
 /* Links */
-footer .footer-content a {
+footer .footer-item a {
   color: #fffaf3;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-footer .footer-content a:hover {
+footer .footer-item a:hover {
   color: #f47b20;
 }
 
-/* Bottom copyright */
-footer .footer-content > p {
+/* Paragraphs */
+footer .footer-item p {
   margin: 0;
+  color: inherit;
+  line-height: 1.6;
 }
 
-footer .footer-content > p:first-of-type {
+/* First column description */
+footer .footer-column:first-child .footer-item:nth-child(2) {
+  max-width: 300px;
+  color: #fffaf3;
+}
+
+/* Bottom section */
+footer .footer-bottom {
   margin-top: 45px;
   padding-top: 20px;
   border-top: 1px solid rgb(255 255 255 / 20%);
 }
 
-footer .footer-content > p:last-of-type {
-  margin-top: 8px;
+footer .footer-bottom p {
+  margin: 0 0 8px;
+  color: #fffaf3;
+}
+
+footer .footer-bottom p:last-child {
   opacity: 0.8;
+}
+
+/* Desktop */
+@media (width >= 900px) {
+  footer .footer-columns {
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 70px;
+  }
 }
 
 /* Mobile */
 @media (width < 900px) {
   footer .footer > div {
-    padding: 40px 24px 20px;
+    padding: 40px 24px 25px;
   }
 
-  footer .footer-content tbody {
-    display: block;
+  footer .footer-columns {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
   }
 
-  footer .footer-content tr {
-    display: block;
+  footer .footer-column {
+    gap: 8px;
   }
 
-  footer .footer-content th,
-  footer .footer-content td {
-    display: block;
-    width: 100%;
-    padding: 8px 0;
+  footer .footer-column .footer-item:first-child {
+    font-size: 19px;
+    margin-bottom: 5px;
   }
 
-  footer .footer-content th {
-    padding-top: 20px;
+  footer .footer-column:first-child .footer-item:nth-child(2) {
+    max-width: 100%;
   }
 
-  footer .footer-content td:first-child p:first-child {
-    font-size: 22px;
+  footer .footer-bottom {
+    margin-top: 35px;
   }
 }
