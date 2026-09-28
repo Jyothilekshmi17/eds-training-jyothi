@@ -6,7 +6,9 @@
   width: 100%;
   margin: 0;
   padding: 0;
+
   background: #ffffff;
+
   box-sizing: border-box;
 }
 
@@ -16,8 +18,9 @@
 
 .header-container {
   width: 100%;
-  min-height: 88px;
-  padding: 0 50px;
+  min-height: 105px;
+
+  padding: 0 55px;
 
   display: flex;
   align-items: center;
@@ -31,56 +34,34 @@
    LOGO
    ========================================================= */
 
-.header-logo-icon {
-  width: 45px;
-  height: 45px;
-
+.header-logo {
   display: flex;
   align-items: center;
-  justify-content: center;
+
+  width: 255px;
+  height: 95px;
 
   flex-shrink: 0;
+
+  text-decoration: none;
+
+  overflow: hidden;
 }
 
-.header-logo-icon svg {
-  width: 45px;
-  height: 45px;
-
+.header-logo-image {
   display: block;
-}
 
-/* Leaf shape */
+  width: 100%;
+  height: 100%;
 
-.header-logo-icon .leaf-shape {
-  fill: #7f9f45;
-  stroke: #244d43;
-  stroke-width: 1.5;
-  stroke-linejoin: round;
-}
+  max-width: none;
 
-/* Leaf veins */
+  margin: 0;
 
-.header-logo-icon .leaf-line {
-  fill: none;
-  stroke: #244d43;
-  stroke-width: 2;
-  stroke-linecap: round;
-}
+  object-fit: contain;
+  object-position: left center;
 
-/* =========================================================
-   LOGO TEXT
-   ========================================================= */
-
-.header-logo-text {
-  color: #244d43;
-
-  font-family: Arial, sans-serif;
-  font-size: 25px;
-  font-weight: 700;
-
-  line-height: 1;
-
-  white-space: nowrap;
+  border: none;
 }
 
 /* =========================================================
@@ -91,13 +72,16 @@
   display: flex;
   align-items: center;
 
-  gap: 38px;
+  gap: 72px;
 
   margin-left: auto;
-  margin-right: 25px;
+
+  height: 100%;
 }
 
-/* Navigation links */
+/* =========================================================
+   NAVIGATION LINKS
+   ========================================================= */
 
 .header-nav-link {
   position: relative;
@@ -105,42 +89,82 @@
   display: inline-flex;
   align-items: center;
 
+  height: 100%;
+
   padding: 8px 0;
 
   color: #3f514b;
 
   font-family: Arial, sans-serif;
-  font-size: 15px;
+
+  font-size: 20px;
   font-weight: 500;
 
   line-height: 1;
 
   text-decoration: none;
 
+  white-space: nowrap;
+
   transition:
     color 0.25s ease,
     transform 0.25s ease;
 }
 
-/* Hover */
+/* =========================================================
+   HOVER
+   ========================================================= */
 
 .header-nav-link:hover {
   color: #719b32;
+
   transform: translateY(-1px);
+}
+
+/* =========================================================
+   ACTIVE LINK
+   ========================================================= */
+
+.header-nav-link.active {
+  color: #719b32;
+
+  font-weight: 600;
 }
 
 /* Active underline */
 
-.header-nav-link::after {
+.header-nav-link.active::after {
   content: "";
 
   position: absolute;
 
   left: 0;
-  bottom: 0;
+  right: 0;
+
+  bottom: 22px;
+
+  height: 3px;
+
+  background: #719b32;
+
+  border-radius: 5px;
+}
+
+/* =========================================================
+   HOVER UNDERLINE
+   ========================================================= */
+
+.header-nav-link:not(.active)::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: 22px;
 
   width: 0;
-  height: 2px;
+  height: 3px;
 
   background: #719b32;
 
@@ -149,7 +173,7 @@
   transition: width 0.25s ease;
 }
 
-.header-nav-link:hover::after {
+.header-nav-link:not(.active):hover::after {
   width: 100%;
 }
 
@@ -160,8 +184,8 @@
 .header-menu-button {
   display: none;
 
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
 
   padding: 0;
 
@@ -179,11 +203,9 @@
   flex-shrink: 0;
 }
 
-/* Menu icon */
-
 .header-menu-button svg {
-  width: 27px;
-  height: 27px;
+  width: 28px;
+  height: 28px;
 
   display: block;
 
@@ -198,13 +220,9 @@
   stroke-linejoin: round;
 }
 
-/* Hover */
-
 .header-menu-button:hover {
   background: #f5f7ed;
 }
-
-/* Focus */
 
 .header-menu-button:focus-visible {
   outline: 3px solid #a7c76a;
@@ -215,34 +233,54 @@
    TABLET
    ========================================================= */
 
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
 
   .header-container {
-    min-height: 82px;
-    padding: 0 30px;
+    min-height: 95px;
+
+    padding: 0 35px;
   }
 
-  .header-logo-text {
-    font-size: 23px;
+  .header-logo {
+    width: 220px;
+    height: 85px;
   }
 
-  .header-logo-icon {
-    width: 42px;
-    height: 42px;
+  .header-nav {
+    gap: 40px;
   }
 
-  .header-logo-icon svg {
-    width: 42px;
-    height: 42px;
+  .header-nav-link {
+    font-size: 17px;
+  }
+
+  .header-nav-link.active::after,
+  .header-nav-link:not(.active)::after {
+    bottom: 18px;
+  }
+}
+
+/* =========================================================
+   SMALL TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .header-container {
+    padding: 0 25px;
+  }
+
+  .header-logo {
+    width: 200px;
+    height: 78px;
   }
 
   .header-nav {
     gap: 25px;
-    margin-right: 10px;
   }
 
   .header-nav-link {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
@@ -255,31 +293,16 @@
   .header-container {
     position: relative;
 
-    min-height: 72px;
+    min-height: 75px;
 
     padding: 0 20px;
 
     justify-content: space-between;
   }
 
-  /* Logo */
-
   .header-logo {
-    gap: 8px;
-  }
-
-  .header-logo-icon {
-    width: 38px;
-    height: 38px;
-  }
-
-  .header-logo-icon svg {
-    width: 38px;
-    height: 38px;
-  }
-
-  .header-logo-text {
-    font-size: 21px;
+    width: 190px;
+    height: 68px;
   }
 
   /* Show hamburger */
@@ -288,22 +311,24 @@
     display: flex;
   }
 
-  /* Hide desktop navigation */
+  /* Hide navigation */
 
   .header-nav {
     display: none;
 
     position: absolute;
 
-    top: 72px;
+    top: 75px;
     left: 0;
     right: 0;
 
     width: 100%;
 
+    height: auto;
+
     margin: 0;
 
-    padding: 18px 20px 22px;
+    padding: 15px 20px 20px;
 
     flex-direction: column;
     align-items: stretch;
@@ -313,28 +338,29 @@
     background: #ffffff;
 
     border-top: 1px solid #e5eadf;
-
     border-bottom: 1px solid #e5eadf;
 
-    box-shadow: 0 8px 20px rgba(36, 77, 67, 0.08);
+    box-shadow: 0 8px 20px rgba(36, 77, 67, 0.10);
 
     box-sizing: border-box;
 
     z-index: 100;
   }
 
-  /* Open mobile menu */
+  /* Open menu */
 
   .header-nav.mobile-menu-open {
     display: flex;
   }
 
-  /* Mobile navigation links */
+  /* Mobile links */
 
   .header-nav-link {
     width: 100%;
 
-    padding: 15px 5px;
+    height: auto;
+
+    padding: 16px 5px;
 
     color: #244d43;
 
@@ -350,14 +376,17 @@
     border-bottom: none;
   }
 
-  .header-nav-link:hover {
+  .header-nav-link.active {
     color: #719b32;
-
-    transform: none;
   }
 
-  .header-nav-link::after {
+  .header-nav-link.active::after,
+  .header-nav-link:not(.active)::after {
     display: none;
+  }
+
+  .header-nav-link:hover {
+    transform: none;
   }
 }
 
@@ -370,21 +399,12 @@
   .header-container {
     min-height: 68px;
 
-    padding: 0 16px;
+    padding: 0 15px;
   }
 
-  .header-logo-icon {
-    width: 35px;
-    height: 35px;
-  }
-
-  .header-logo-icon svg {
-    width: 35px;
-    height: 35px;
-  }
-
-  .header-logo-text {
-    font-size: 19px;
+  .header-logo {
+    width: 170px;
+    height: 60px;
   }
 
   .header-menu-button {
@@ -404,6 +424,8 @@
 .header-logo:focus-visible,
 .header-nav-link:focus-visible {
   outline: 3px solid #a7c76a;
+
   outline-offset: 4px;
+
   border-radius: 4px;
 }
