@@ -187,3 +187,117 @@
     width: 100%;
   }
 }
+/* =========================================================
+   RECIPE GRID (9 CARDS PER PAGE: 3x3 DESKTOP LAYOUT)
+   ========================================================= */
+
+.recipe-cards-container {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  width: 100% !important;
+  max-width: var(--content-width, 1100px) !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+.recipe-card {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  border: 1px solid var(--border-color, #d8e5d5);
+  border-radius: 18px;
+  background-color: var(--surface-color, #fff);
+  box-shadow: var(--shadow, 0 6px 20px rgb(30 70 35 / 9%));
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover, 0 14px 30px rgb(30 70 35 / 15%));
+}
+
+.recipe-card-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: var(--surface-soft, #e8f3e7);
+}
+
+.recipe-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.recipe-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px;
+}
+
+.recipe-card-button {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* =========================================================
+   "VIEW MORE" BUTTON STYLES
+   ========================================================= */
+
+.recipe-load-more-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 40px 0 20px;
+}
+
+.recipe-load-more-btn {
+  min-height: 50px;
+  padding: 0 36px;
+  border: none;
+  border-radius: 999px;
+  background-color: var(--primary-color, #2e7d32);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgb(46 125 50 / 25%);
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe-load-more-btn:hover {
+  background-color: var(--primary-hover, #1b5e20);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgb(46 125 50 / 35%);
+}
+
+.recipe-load-more-btn:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   RESPONSIVE LAYOUT
+   ========================================================= */
+
+@media (width < 900px) {
+  .recipe-cards-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+  }
+}
+
+@media (width < 600px) {
+  .recipe-cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .recipe-load-more-btn {
+    width: 100%;
+  }
+}

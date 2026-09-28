@@ -29,14 +29,26 @@ export default function decorate(block) {
     .filter((recipe) => recipe.name);
 
   const cardsContainer = document.createElement('div');
-
   cardsContainer.className = 'recipe-cards-container';
 
+  // Create "View More" button container
+  const loadMoreWrapper = document.createElement('div');
+  loadMoreWrapper.className = 'recipe-load-more-wrapper';
+
+  const loadMoreBtn = document.createElement('button');
+  loadMoreBtn.className = 'recipe-load-more-btn';
+  loadMoreBtn.textContent = 'View More Recipes';
+  loadMoreWrapper.append(loadMoreBtn);
+
   block.innerHTML = '';
-  block.append(cardsContainer);
+  block.append(cardsContainer, loadMoreWrapper);
 
   let currentSearch = '';
   let currentCategory = 'all';
+
+  // Pagination State
+  const CARDS_PER_PAGE = 9;
+  let visibleCount = CARDS_PER_PAGE;
 
   function normalize(value) {
     return value
@@ -69,11 +81,9 @@ export default function decorate(block) {
 
   function createCard(recipe) {
     const card = document.createElement('article');
-
     card.className = 'recipe-card';
 
     const imageContainer = document.createElement('div');
-
     imageContainer.className = 'recipe-card-image';
 
     if (recipe.image) {
@@ -81,26 +91,21 @@ export default function decorate(block) {
     }
 
     const content = document.createElement('div');
-
     content.className = 'recipe-card-content';
 
     const category = document.createElement('div');
-
     category.className = 'recipe-card-category';
     category.textContent = recipe.category;
 
     const title = document.createElement('h3');
-
     title.className = 'recipe-card-title';
     title.textContent = recipe.name;
 
     const time = document.createElement('p');
-
     time.className = 'recipe-card-time';
     time.textContent = `⏱ ${recipe.time}`;
 
     const link = document.createElement('a');
-
     link.className = 'recipe-card-button';
     link.href = `/recipe-detail?recipe=${encodeURIComponent(recipe.id)}`;
     link.textContent = 'View Recipe';
@@ -129,11 +134,9 @@ export default function decorate(block) {
 
     if (filteredRecipes.length === 0) {
       const message = document.createElement('div');
-
       message.className = 'no-recipes';
 
       const heading = document.createElement('h3');
-
       heading.textContent = 'No recipes found';
 
       const text = document.createElement('p');
@@ -152,26 +155,42 @@ export default function decorate(block) {
       }
 
       message.append(heading, text);
-
       cardsContainer.append(message);
 
+      // Hide load more button when no recipes match
+      loadMoreWrapper.style.display = 'none';
       return;
     }
 
-    filteredRecipes.forEach((recipe) => {
+    // Render only up to visibleCount
+    const itemsToDisplay = filteredRecipes.slice(0, visibleCount);
+    itemsToDisplay.forEach((recipe) => {
       cardsContainer.append(createCard(recipe));
     });
+
+    // Toggle "View More" button visibility
+    if (visibleCount >= filteredRecipes.length) {
+      loadMoreWrapper.style.display = 'none';
+    } else {
+      loadMoreWrapper.style.display = 'flex';
+    }
   }
+
+  // "View More" Click Listener
+  loadMoreBtn.addEventListener('click', () => {
+    visibleCount += CARDS_PER_PAGE;
+    renderRecipes();
+  });
 
   document.addEventListener('recipe-search', (event) => {
     currentSearch = event.detail.query;
-
+    visibleCount = CARDS_PER_PAGE; // Reset to 9 items on search
     renderRecipes();
   });
 
   document.addEventListener('recipe-category', (event) => {
     currentCategory = event.detail.category;
-
+    visibleCount = CARDS_PER_PAGE; // Reset to 9 items on category change
     renderRecipes();
   });
 
