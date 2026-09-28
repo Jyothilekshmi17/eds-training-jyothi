@@ -90,31 +90,35 @@
 }
 
 /* Mobile */
+/* Mobile */
 
 @media (width < 600px) {
   .recipe-search {
-    padding: 30px 20px;
+    padding: 20px 16px !important;
   }
 
   .recipe-search-container {
-    flex-direction: column;
-    gap: 14px;
-    padding: 20px;
-    border-radius: 20px;
+    flex-direction: column !important;
+    gap: 14px !important;
+    padding: 18px !important;
+    border-radius: 20px !important;
   }
 
   .recipe-search-input {
-    width: 100%;
-    height: 58px;
-    padding: 0 20px;
-    border-radius: 29px;
-    font-size: 16px;
+    width: 100% !important;
+    height: 58px !important;
+    min-height: 58px !important; /* Prevents global CSS from collapsing height */
+    padding: 0 20px !important;  /* Horizontal padding only so text stays vertically centered */
+    border-radius: 29px !important;
+    font-size: 16px !important;
+    box-sizing: border-box !important;
   }
 
   .recipe-search-button {
-    width: 100%;
-    height: 58px;
-    border-radius: 29px;
-    font-size: 17px;
+    width: 100% !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    border-radius: 29px !important;
+    font-size: 17px !important;
   }
 }
