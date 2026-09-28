@@ -1,171 +1,219 @@
-import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
+export default function decorate(block) {
+  const headerContainer = document.createElement('div');
+  headerContainer.className = 'header-container';
 
-// media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+  /* =========================
+     LOGO
+     ========================= */
 
-function closeOnEscape(e) {
-  if (e.code === 'Escape') {
-    const nav = document.getElementById('nav');
-    const navSections = nav.querySelector('.nav-sections');
-    if (!navSections) return;
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections);
-      navSectionExpanded.focus();
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections);
-      nav.querySelector('button').focus();
-    }
-  }
-}
+  const logo = document.createElement('a');
+  logo.className = 'header-logo';
+  logo.href = '/';
 
-function closeOnFocusLost(e) {
-  const nav = e.currentTarget;
-  if (!nav.contains(e.relatedTarget)) {
-    const navSections = nav.querySelector('.nav-sections');
-    if (!navSections) return;
-    const navSectionExpanded = navSections.querySelector('[aria-expanded="true"]');
-    if (navSectionExpanded && isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleAllNavSections(navSections, false);
-    } else if (!isDesktop.matches) {
-      // eslint-disable-next-line no-use-before-define
-      toggleMenu(nav, navSections, false);
-    }
-  }
-}
+  const logoIcon = document.createElement('span');
+  logoIcon.className = 'header-logo-icon';
 
-function openOnKeydown(e) {
-  const focused = document.activeElement;
-  const isNavDrop = focused.className === 'nav-drop';
-  if (isNavDrop && (e.code === 'Enter' || e.code === 'Space')) {
-    const dropExpanded = focused.getAttribute('aria-expanded') === 'true';
-    // eslint-disable-next-line no-use-before-define
-    toggleAllNavSections(focused.closest('.nav-sections'));
-    focused.setAttribute('aria-expanded', dropExpanded ? 'false' : 'true');
-  }
-}
+  logoIcon.innerHTML = `
+    <svg viewBox="0 0 60 60" aria-hidden="true">
+      <path
+        class="leaf-shape"
+        d="M12 43C10 27 17 12 43 7C47 29 37 47 19 51C16 49 14 46 12 43Z">
+      </path>
 
-function focusNavSection() {
-  document.activeElement.addEventListener('keydown', openOnKeydown);
-}
+      <path
+        class="leaf-line"
+        d="M14 48C23 38 31 28 39 17">
+      </path>
 
-/**
- * Toggles all nav sections
- * @param {Element} sections The container element
- * @param {Boolean} expanded Whether the element should be expanded or collapsed
- */
-function toggleAllNavSections(sections, expanded = false) {
-  if (!sections) return;
-  sections.querySelectorAll('.nav-sections .default-content-wrapper > ul > li').forEach((section) => {
-    section.setAttribute('aria-expanded', expanded);
-  });
-}
+      <path
+        class="leaf-line"
+        d="M22 38L18 27">
+      </path>
 
-/**
- * Toggles the entire nav
- * @param {Element} nav The container element
- * @param {Element} navSections The nav sections within the container element
- * @param {*} forceExpanded Optional param to force nav expand behavior when not null
- */
-function toggleMenu(nav, navSections, forceExpanded = null) {
-  const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
-  const button = nav.querySelector('.nav-hamburger button');
-  document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
-  nav.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-  toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
-  button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
-  // enable nav dropdown keyboard accessibility
-  if (navSections) {
-    const navDrops = navSections.querySelectorAll('.nav-drop');
-    if (isDesktop.matches) {
-      navDrops.forEach((drop) => {
-        if (!drop.hasAttribute('tabindex')) {
-          drop.setAttribute('tabindex', 0);
-          drop.addEventListener('focus', focusNavSection);
-        }
-      });
-    } else {
-      navDrops.forEach((drop) => {
-        drop.removeAttribute('tabindex');
-        drop.removeEventListener('focus', focusNavSection);
-      });
-    }
-  }
+      <path
+        class="leaf-line"
+        d="M27 32L39 31">
+      </path>
 
-  // enable menu collapse on escape keypress
-  if (!expanded || isDesktop.matches) {
-    // collapse menu on escape press
-    window.addEventListener('keydown', closeOnEscape);
-    // collapse menu on focus lost
-    nav.addEventListener('focusout', closeOnFocusLost);
-  } else {
-    window.removeEventListener('keydown', closeOnEscape);
-    nav.removeEventListener('focusout', closeOnFocusLost);
-  }
-}
+      <path
+        class="leaf-line"
+        d="M32 25L29 17">
+      </path>
+    </svg>
+  `;
 
-/**
- * loads and decorates the header, mainly the nav
- * @param {Element} block The header block element
- */
-export default async function decorate(block) {
-  // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
+  const logoText = document.createElement('span');
+  logoText.className = 'header-logo-text';
+  logoText.textContent = 'Recipe Finder';
 
-  // decorate nav DOM
-  block.textContent = '';
+  logo.appendChild(logoIcon);
+  logo.appendChild(logoText);
+
+  /* =========================
+     NAVIGATION
+     ========================= */
+
   const nav = document.createElement('nav');
-  nav.id = 'nav';
-  while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
+  nav.className = 'header-nav';
 
-  const classes = ['brand', 'sections', 'tools'];
-  classes.forEach((c, i) => {
-    const section = nav.children[i];
-    if (section) section.classList.add(`nav-${c}`);
+  const navItems = [
+    { text: 'Home', href: '/' },
+    { text: 'Recipes', href: '/recipes' },
+    { text: 'About Us', href: 'https://main--eds-training-sinchanaamin--sinchana05-arch.aem.page/aboutus' },
+    { text: 'Contact', href: '/contact' },
+  ];
+
+  navItems.forEach((item) => {
+    const link = document.createElement('a');
+
+    link.className = 'header-nav-link';
+    link.href = item.href;
+    link.textContent = item.text;
+
+    nav.appendChild(link);
   });
 
-  const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
-  if (brandLink) {
-    brandLink.className = '';
-    brandLink.closest('.button-container').className = '';
+  /* =========================
+     SEARCH
+     ========================= */
+
+  const searchForm = document.createElement('form');
+  searchForm.className = 'header-search';
+
+  const searchInput = document.createElement('input');
+  searchInput.type = 'search';
+  searchInput.placeholder = 'Search recipes...';
+  searchInput.setAttribute('aria-label', 'Search recipes');
+
+  const searchButton = document.createElement('button');
+  searchButton.type = 'submit';
+  searchButton.className = 'header-search-button';
+  searchButton.setAttribute('aria-label', 'Search');
+
+  searchButton.innerHTML = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="10.5" cy="10.5" r="6.5"></circle>
+      <path d="M15.5 15.5L21 21"></path>
+    </svg>
+  `;
+
+  searchForm.appendChild(searchInput);
+  searchForm.appendChild(searchButton);
+
+  searchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const value = searchInput.value.trim();
+
+    if (value) {
+      window.location.href =
+        `/recipes?search=${encodeURIComponent(value)}`;
+    }
+  });
+
+  /* =========================
+     DESKTOP / MOBILE TOGGLE
+     ========================= */
+
+  const viewToggle = document.createElement('div');
+  viewToggle.className = 'view-toggle';
+
+  const desktopButton = document.createElement('button');
+  desktopButton.type = 'button';
+  desktopButton.className = 'view-button desktop-button';
+  desktopButton.textContent = 'Desktop';
+
+  const mobileButton = document.createElement('button');
+  mobileButton.type = 'button';
+  mobileButton.className = 'view-button mobile-button';
+  mobileButton.textContent = 'Mobile';
+
+  viewToggle.appendChild(desktopButton);
+  viewToggle.appendChild(mobileButton);
+
+  /* =========================
+     MOBILE MENU BUTTON
+     ========================= */
+
+  const menuButton = document.createElement('button');
+
+  menuButton.type = 'button';
+  menuButton.className = 'header-menu-button';
+  menuButton.setAttribute('aria-label', 'Open menu');
+  menuButton.setAttribute('aria-expanded', 'false');
+
+  menuButton.innerHTML = `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 6H20"></path>
+      <path d="M4 12H20"></path>
+      <path d="M4 18H20"></path>
+    </svg>
+  `;
+
+  /* =========================
+     VIEW CHANGE
+     ========================= */
+
+  function changeView(view) {
+    document.body.classList.remove(
+      'view-desktop',
+      'view-mobile',
+    );
+
+    document.body.classList.add(`view-${view}`);
+
+    desktopButton.classList.remove('active');
+    mobileButton.classList.remove('active');
+
+    if (view === 'desktop') {
+      desktopButton.classList.add('active');
+
+      nav.classList.remove('mobile-menu-open');
+
+      menuButton.setAttribute(
+        'aria-expanded',
+        'false',
+      );
+    } else {
+      mobileButton.classList.add('active');
+    }
   }
 
-  const navSections = nav.querySelector('.nav-sections');
-  if (navSections) {
-    navSections.querySelectorAll(':scope .default-content-wrapper > ul > li').forEach((navSection) => {
-      if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
-      navSection.addEventListener('click', () => {
-        if (isDesktop.matches) {
-          const expanded = navSection.getAttribute('aria-expanded') === 'true';
-          toggleAllNavSections(navSections);
-          navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-        }
-      });
-    });
-  }
+  desktopButton.addEventListener('click', () => {
+    changeView('desktop');
+  });
 
-  // hamburger for mobile
-  const hamburger = document.createElement('div');
-  hamburger.classList.add('nav-hamburger');
-  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-      <span class="nav-hamburger-icon"></span>
-    </button>`;
-  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-  nav.prepend(hamburger);
-  nav.setAttribute('aria-expanded', 'false');
-  // prevent mobile nav behavior on window resize
-  toggleMenu(nav, navSections, isDesktop.matches);
-  isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+  mobileButton.addEventListener('click', () => {
+    changeView('mobile');
+  });
 
-  const navWrapper = document.createElement('div');
-  navWrapper.className = 'nav-wrapper';
-  navWrapper.append(nav);
-  block.append(navWrapper);
+  /* =========================
+     MOBILE MENU
+     ========================= */
+
+  menuButton.addEventListener('click', () => {
+    const isOpen =
+      nav.classList.toggle('mobile-menu-open');
+
+    menuButton.setAttribute(
+      'aria-expanded',
+      isOpen ? 'true' : 'false',
+    );
+  });
+
+  /* =========================
+     BUILD HEADER
+     ========================= */
+
+  headerContainer.appendChild(logo);
+  headerContainer.appendChild(nav);
+  headerContainer.appendChild(searchForm);
+  headerContainer.appendChild(viewToggle);
+  headerContainer.appendChild(menuButton);
+
+  block.innerHTML = '';
+  block.appendChild(headerContainer);
+
+  // Desktop by default
+  changeView('desktop');
 }
