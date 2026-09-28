@@ -31,7 +31,6 @@ export default function decorate(block) {
   const cardsContainer = document.createElement('div');
   cardsContainer.className = 'recipe-cards-container';
 
-  // Check if wrapper already exists outside to prevent duplicate button renders
   let loadMoreWrapper = block.parentElement?.querySelector('.recipe-load-more-wrapper');
   let loadMoreBtn;
 
@@ -51,7 +50,6 @@ export default function decorate(block) {
   block.innerHTML = '';
   block.append(cardsContainer);
 
-  // Append loadMoreWrapper OUTSIDE the block grid to allow center alignment across entire screen
   if (block.parentElement && !block.parentElement.contains(loadMoreWrapper)) {
     block.parentElement.appendChild(loadMoreWrapper);
   }
@@ -59,7 +57,6 @@ export default function decorate(block) {
   let currentSearch = '';
   let currentCategory = 'all';
 
-  // Pagination Configuration (9 items per page)
   const CARDS_PER_PAGE = 9;
   let visibleCount = CARDS_PER_PAGE;
 
@@ -129,6 +126,15 @@ export default function decorate(block) {
     return card;
   }
 
+  // Smooth scroll helper to bring cards into focus
+  function scrollToCards() {
+    const targetOffset = cardsContainer.getBoundingClientRect().top + window.scrollY - 100;
+    window.scrollTo({
+      top: targetOffset,
+      behavior: 'smooth',
+    });
+  }
+
   function renderRecipes() {
     const filteredRecipes = recipes.filter(
       (recipe) => matchesSearch(recipe) && matchesCategory(recipe),
@@ -158,18 +164,15 @@ export default function decorate(block) {
       message.append(heading, text);
       cardsContainer.append(message);
 
-      // FORCE HIDE when zero recipes
       loadMoreWrapper.setAttribute('style', 'display: none !important;');
       return;
     }
 
-    // Render slice up to visibleCount
     const itemsToDisplay = filteredRecipes.slice(0, visibleCount);
     itemsToDisplay.forEach((recipe) => {
       cardsContainer.append(createCard(recipe));
     });
 
-    // FORCE HIDE if visible items equal or exceed total filtered items
     if (visibleCount >= filteredRecipes.length) {
       loadMoreWrapper.setAttribute('style', 'display: none !important;');
     } else {
@@ -177,7 +180,6 @@ export default function decorate(block) {
     }
   }
 
-  // Click Listener to load 9 more recipes
   loadMoreBtn.onclick = () => {
     visibleCount += CARDS_PER_PAGE;
     renderRecipes();
@@ -187,12 +189,14 @@ export default function decorate(block) {
     currentSearch = event.detail.query;
     visibleCount = CARDS_PER_PAGE;
     renderRecipes();
+    scrollToCards(); // Auto-scrolls on search
   });
 
   document.addEventListener('recipe-category', (event) => {
     currentCategory = event.detail.category;
     visibleCount = CARDS_PER_PAGE;
     renderRecipes();
+    scrollToCards(); // Auto-scrolls on category change
   });
 
   renderRecipes();
