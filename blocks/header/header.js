@@ -73,4 +73,4 @@ export default function decorate(block) {
     nav.appendChild(link);
   });
 
- 
+}
