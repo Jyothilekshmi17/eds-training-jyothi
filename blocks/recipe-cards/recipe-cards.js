@@ -31,7 +31,7 @@ export default function decorate(block) {
   const cardsContainer = document.createElement('div');
   cardsContainer.className = 'recipe-cards-container';
 
-  // Create "View More" button container
+  // Create centered "View More" button wrapper
   const loadMoreWrapper = document.createElement('div');
   loadMoreWrapper.className = 'recipe-load-more-wrapper';
 
@@ -46,7 +46,7 @@ export default function decorate(block) {
   let currentSearch = '';
   let currentCategory = 'all';
 
-  // Pagination State
+  // Pagination Configuration (9 items per page)
   const CARDS_PER_PAGE = 9;
   let visibleCount = CARDS_PER_PAGE;
 
@@ -157,18 +157,18 @@ export default function decorate(block) {
       message.append(heading, text);
       cardsContainer.append(message);
 
-      // Hide load more button when no recipes match
+      // Hide load more button completely when zero recipes match
       loadMoreWrapper.style.display = 'none';
       return;
     }
 
-    // Render only up to visibleCount
+    // Render slice up to visibleCount
     const itemsToDisplay = filteredRecipes.slice(0, visibleCount);
     itemsToDisplay.forEach((recipe) => {
       cardsContainer.append(createCard(recipe));
     });
 
-    // Toggle "View More" button visibility
+    // Hide load more button completely if all available recipes are visible
     if (visibleCount >= filteredRecipes.length) {
       loadMoreWrapper.style.display = 'none';
     } else {
@@ -176,7 +176,7 @@ export default function decorate(block) {
     }
   }
 
-  // "View More" Click Listener
+  // Event listener to append next batch of 9 cards
   loadMoreBtn.addEventListener('click', () => {
     visibleCount += CARDS_PER_PAGE;
     renderRecipes();
@@ -184,13 +184,13 @@ export default function decorate(block) {
 
   document.addEventListener('recipe-search', (event) => {
     currentSearch = event.detail.query;
-    visibleCount = CARDS_PER_PAGE; // Reset to 9 items on search
+    visibleCount = CARDS_PER_PAGE; // Reset visible count on new search
     renderRecipes();
   });
 
   document.addEventListener('recipe-category', (event) => {
     currentCategory = event.detail.category;
-    visibleCount = CARDS_PER_PAGE; // Reset to 9 items on category change
+    visibleCount = CARDS_PER_PAGE; // Reset visible count on category switch
     renderRecipes();
   });
 
