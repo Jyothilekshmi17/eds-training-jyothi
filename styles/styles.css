@@ -83,7 +83,7 @@ body.appear {
 }
 
 /* =========================
-   HEADER
+   HEADER & FOOTER
    ========================= */
 
 header {
@@ -93,6 +93,10 @@ header {
 header .header,
 footer .footer {
   visibility: hidden;
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 header .header[data-block-status="loaded"],
@@ -158,7 +162,7 @@ a:hover {
 }
 
 /* =========================
-   MAIN
+   MAIN & SECTIONS
    ========================= */
 
 main {
@@ -168,8 +172,8 @@ main {
 
 main > .section {
   width: 100%;
-  margin: 0;
-  padding: 48px 0;
+  margin: 0 auto;
+  padding: 48px 24px;
 }
 
 main > .section > div {
@@ -256,8 +260,9 @@ button {
 
 .recipe-search {
   width: 100%;
-  margin: 0;
-  padding: 12px 24px 28px;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 12px 0 28px;
   box-sizing: border-box;
 }
 
@@ -317,15 +322,15 @@ button {
 
 .recipe-categories {
   width: 100%;
-  margin: 0;
-  padding: 8px 24px 36px;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 8px 0 36px;
   box-sizing: border-box;
 }
 
 .recipe-categories-container {
   display: flex;
   width: 100%;
-  max-width: var(--content-width);
   margin: 0 auto;
   padding: 0;
   justify-content: center;
@@ -372,15 +377,15 @@ button {
 
 .recipe-cards {
   width: 100%;
-  margin: 0;
-  padding: 16px 24px 60px;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 16px 0 60px;
   box-sizing: border-box;
 }
 
 .recipe-cards-container {
   display: grid;
   width: 100%;
-  max-width: var(--content-width);
   margin: 0 auto;
   padding: 0;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -537,11 +542,11 @@ main > .section:first-child {
 
 @media (width >= 600px) and (width < 900px) {
   main > .section {
-    padding: 40px 0;
+    padding: 40px 20px;
   }
 
   main > .section > div {
-    padding: 0 20px;
+    padding: 0;
   }
 
   h1 {
@@ -550,21 +555,6 @@ main > .section:first-child {
 
   h2 {
     font-size: 32px;
-  }
-
-  .recipe-search {
-    padding-right: 20px;
-    padding-left: 20px;
-  }
-
-  .recipe-categories {
-    padding-right: 20px;
-    padding-left: 20px;
-  }
-
-  .recipe-cards {
-    padding-right: 20px;
-    padding-left: 20px;
   }
 
   .recipe-cards-container {
@@ -586,12 +576,17 @@ main > .section:first-child {
     --body-font-size-m: 16px;
   }
 
+  header .header,
+  footer .footer {
+    padding: 0 16px;
+  }
+
   main > .section {
-    padding: 32px 0;
+    padding: 32px 16px;
   }
 
   main > .section > div {
-    padding: 0 16px;
+    padding: 0;
   }
 
   main > .section:first-child {
@@ -614,7 +609,7 @@ main > .section:first-child {
   /* Search */
 
   .recipe-search {
-    padding: 8px 16px 24px;
+    padding: 8px 0 24px;
   }
 
   .recipe-search-container {
@@ -630,7 +625,7 @@ main > .section:first-child {
   /* Categories */
 
   .recipe-categories {
-    padding: 4px 16px 28px;
+    padding: 4px 0 28px;
   }
 
   .recipe-categories-container {
@@ -647,7 +642,7 @@ main > .section:first-child {
   /* Cards */
 
   .recipe-cards {
-    padding: 8px 16px 40px;
+    padding: 8px 0 40px;
   }
 
   .recipe-cards-container {
