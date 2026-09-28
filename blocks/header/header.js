@@ -73,44 +73,7 @@ export default function decorate(block) {
     nav.appendChild(link);
   });
 
-  /* =========================
-     SEARCH
-     ========================= */
-
-  const searchForm = document.createElement('form');
-  searchForm.className = 'header-search';
-
-  const searchInput = document.createElement('input');
-  searchInput.type = 'search';
-  searchInput.placeholder = 'Search recipes...';
-  searchInput.setAttribute('aria-label', 'Search recipes');
-
-  const searchButton = document.createElement('button');
-  searchButton.type = 'submit';
-  searchButton.className = 'header-search-button';
-  searchButton.setAttribute('aria-label', 'Search');
-
-  searchButton.innerHTML = `
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="10.5" cy="10.5" r="6.5"></circle>
-      <path d="M15.5 15.5L21 21"></path>
-    </svg>
-  `;
-
-  searchForm.appendChild(searchInput);
-  searchForm.appendChild(searchButton);
-
-  searchForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const value = searchInput.value.trim();
-
-    if (value) {
-      window.location.href =
-        `/recipes?search=${encodeURIComponent(value)}`;
-    }
-  });
-
+ 
   /* =========================
      DESKTOP / MOBILE TOGGLE
      ========================= */
