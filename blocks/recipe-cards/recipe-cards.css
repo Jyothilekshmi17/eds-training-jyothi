@@ -345,3 +345,111 @@
 .reset-filters-btn:active {
   transform: translateY(0) !important;
 }
+/* =========================================================
+   VIEW MORE BUTTON STYLES WITH COUNT BADGE
+   ========================================================= */
+
+.recipe-load-more-wrapper {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
+  margin-top: 40px !important;
+  margin-bottom: 20px !important;
+}
+
+.recipe-load-more-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  min-height: 52px !important;
+  padding: 0 32px !important;
+  background: #ffffff !important;
+  color: #2e7d32 !important;
+  border: 2px solid #2e7d32 !important;
+  border-radius: 999px !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px rgba(46, 125, 50, 0.1) !important;
+  transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.recipe-load-more-btn:hover {
+  background: #2e7d32 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(46, 125, 50, 0.25) !important;
+}
+
+.recipe-load-more-btn:active {
+  transform: translateY(0) !important;
+}
+
+/* Badge showing remaining recipes */
+.load-more-badge {
+  background: #e8f5e9 !important;
+  color: #2e7d32 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 12px !important;
+  transition: all 0.25s ease !important;
+}
+
+.recipe-load-more-btn:hover .load-more-badge {
+  background: rgba(255, 255, 255, 0.25) !important;
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   LIKE / DISLIKE BUTTONS WITH COUNTS
+   ========================================================= */
+
+.recipe-card-reactions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: #f4f7f4 !important;
+  padding: 4px 8px !important;
+  border-radius: 999px !important;
+  border: 1px solid #e0e8df !important;
+}
+
+.reaction-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  min-width: 44px !important;
+  height: 32px !important;
+  padding: 0 8px !important;
+  border: none !important;
+  border-radius: 16px !important;
+  background: transparent !important;
+  color: #637565 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.reaction-btn:hover {
+  background-color: #e2ede1 !important;
+  color: #18351f !important;
+}
+
+.like-btn.active {
+  background-color: #e8f5e9 !important;
+  color: #2e7d32 !important;
+}
+
+.dislike-btn.active {
+  background-color: #ffebee !important;
+  color: #c62828 !important;
+}
+
+.reaction-btn .count {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
