@@ -41,6 +41,7 @@ export default function decorate(block) {
   loadMoreWrapper.append(loadMoreBtn);
 
   block.innerHTML = '';
+  // Append as direct siblings under the main block wrapper
   block.append(cardsContainer, loadMoreWrapper);
 
   let currentSearch = '';
@@ -110,17 +111,9 @@ export default function decorate(block) {
     link.href = `/recipe-detail?recipe=${encodeURIComponent(recipe.id)}`;
     link.textContent = 'View Recipe';
 
-    content.append(
-      category,
-      title,
-      time,
-      link,
-    );
+    content.append(category, title, time, link);
 
-    card.append(
-      imageContainer,
-      content,
-    );
+    card.append(imageContainer, content);
 
     return card;
   }
@@ -142,14 +135,11 @@ export default function decorate(block) {
       const text = document.createElement('p');
 
       if (currentSearch && currentCategory !== 'all') {
-        text.textContent =
-          `No recipes found for "${currentSearch}" in ${currentCategory}.`;
+        text.textContent = `No recipes found for "${currentSearch}" in ${currentCategory}.`;
       } else if (currentSearch) {
-        text.textContent =
-          `No recipes found for "${currentSearch}".`;
+        text.textContent = `No recipes found for "${currentSearch}".`;
       } else if (currentCategory !== 'all') {
-        text.textContent =
-          `No recipes are available in the ${currentCategory} category.`;
+        text.textContent = `No recipes are available in the ${currentCategory} category.`;
       } else {
         text.textContent = 'No recipes are currently available.';
       }
@@ -157,8 +147,8 @@ export default function decorate(block) {
       message.append(heading, text);
       cardsContainer.append(message);
 
-      // Hide load more button completely when zero recipes match
-      loadMoreWrapper.style.display = 'none';
+      // Hide button if no results match
+      loadMoreWrapper.classList.add('is-hidden');
       return;
     }
 
@@ -168,11 +158,11 @@ export default function decorate(block) {
       cardsContainer.append(createCard(recipe));
     });
 
-    // Hide load more button completely if all available recipes are visible
+    // Check if total items are less than or equal to currently visible amount
     if (visibleCount >= filteredRecipes.length) {
-      loadMoreWrapper.style.display = 'none';
+      loadMoreWrapper.classList.add('is-hidden');
     } else {
-      loadMoreWrapper.style.display = 'flex';
+      loadMoreWrapper.classList.remove('is-hidden');
     }
   }
 
@@ -184,21 +174,19 @@ export default function decorate(block) {
 
   document.addEventListener('recipe-search', (event) => {
     currentSearch = event.detail.query;
-    visibleCount = CARDS_PER_PAGE; // Reset visible count on new search
+    visibleCount = CARDS_PER_PAGE; // Reset count on new search
     renderRecipes();
   });
 
   document.addEventListener('recipe-category', (event) => {
     currentCategory = event.detail.category;
-    visibleCount = CARDS_PER_PAGE; // Reset visible count on category switch
+    visibleCount = CARDS_PER_PAGE; // Reset count on category change
     renderRecipes();
   });
 
   renderRecipes();
 
   setTimeout(() => {
-    document.dispatchEvent(
-      new CustomEvent('recipe-categories-updated'),
-    );
+    document.dispatchEvent(new CustomEvent('recipe-categories-updated'));
   }, 100);
 }
