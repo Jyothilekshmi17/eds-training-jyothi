@@ -60,6 +60,9 @@ export default function decorate(block) {
   const CARDS_PER_PAGE = 9;
   let visibleCount = CARDS_PER_PAGE;
 
+  // Track if user explicitly asked to search (Button click or Enter key)
+  let shouldScrollOnSearch = false;
+
   function normalize(value) {
     return value
       .toLowerCase()
@@ -185,22 +188,36 @@ export default function decorate(block) {
     renderRecipes();
   };
 
+  // Attach DOM listeners to detect physical Search Button or Enter key interactions
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.recipe-search-button')) {
+      shouldScrollOnSearch = true;
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.target.closest('.recipe-search-input')) {
+      shouldScrollOnSearch = true;
+    }
+  });
+
   document.addEventListener('recipe-search', (event) => {
-    currentSearch = event.detail.query;
+    currentSearch = event.detail.query || event.detail;
     visibleCount = CARDS_PER_PAGE;
     renderRecipes();
 
-    // Only scroll if explicitly triggered by button click or Enter key
-    if (event.detail.isSubmit || event.detail.explicitSearch) {
+    // Scroll only if the user pressed Enter or clicked Search
+    if (shouldScrollOnSearch) {
       scrollToCards();
+      shouldScrollOnSearch = false; // reset flag
     }
   });
 
   document.addEventListener('recipe-category', (event) => {
-    currentCategory = event.detail.category;
+    currentCategory = event.detail.category || event.detail;
     visibleCount = CARDS_PER_PAGE;
     renderRecipes();
-    scrollToCards(); // Category pill clicks scroll smoothly
+    scrollToCards(); // Category pill clicks scroll down automatically
   });
 
   renderRecipes();
