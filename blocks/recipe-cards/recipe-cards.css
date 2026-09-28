@@ -1,66 +1,73 @@
-/* =========================
-   RECIPE CARDS BLOCK
-   ========================= */
+/* =========================================================
+   RECIPE CARDS BLOCK - EDS COMPONENT STYLES
+   ========================================================= */
 
+/* Prevent flex parent collapse across all EDS wrapper levels */
+.recipe-cards-wrapper,
+.recipe-cards-container,
 .recipe-cards.block,
 .recipe-cards {
-  display: block;
-  width: 100%;
-  max-width: var(--content-width, 1100px);
-  margin: 0 auto;
-  padding: 32px 0 60px;
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  flex: 1 1 100% !important;
   box-sizing: border-box;
 }
 
-/* Fix for EDS nested DOM structure */
+/* Block padding */
+.recipe-cards.block,
+.recipe-cards {
+  display: block;
+  padding: 32px 0 60px;
+}
+
+/* Grid Layout (Targeting both EDS native div structure and custom JS container) */
 .recipe-cards > div,
 .recipe-cards-container {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   gap: 28px !important;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0;
+  width: 100% !important;
   box-sizing: border-box;
 }
 
-/* Ensure intermediate EDS wrapper divs don't constrain width */
+/* Intermediate EDS child wrapper fix */
 .recipe-cards > div > div {
   width: 100%;
   min-width: 0;
 }
 
-/* =========================
+/* =========================================================
    RECIPE CARD ITEM
-   ========================= */
+   ========================================================= */
 
 .recipe-card {
   display: flex;
+  flex-direction: column;
   width: 100%;
   min-width: 0;
   height: 100%;
-  flex-direction: column;
   overflow: hidden;
-  border: 1px solid var(--border-color, #d8e5d5);
+  border: 1px solid #d8e5d5;
   border-radius: 18px;
-  background-color: var(--surface-color, #fff);
-  box-shadow: var(--shadow, 0 6px 20px rgb(30 70 35 / 9%));
+  background-color: #ffffff;
+  box-shadow: 0 6px 20px rgb(30 70 35 / 9%);
   box-sizing: border-box;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .recipe-card:hover {
   transform: translateY(-5px);
-  box-shadow: var(--shadow-hover, 0 14px 30px rgb(30 70 35 / 15%));
+  box-shadow: 0 14px 30px rgb(30 70 35 / 15%);
 }
 
+/* Card Image */
 .recipe-card-image {
   width: 100%;
   height: 220px;
   overflow: hidden;
-  background-color: var(--surface-soft, #e8f3e7);
+  background-color: #e8f3e7;
 }
 
 .recipe-card-image img {
@@ -75,6 +82,7 @@
   transform: scale(1.04);
 }
 
+/* Card Content */
 .recipe-card-content {
   display: flex;
   flex: 1;
@@ -85,7 +93,7 @@
 
 .recipe-card-category {
   margin: 0 0 8px;
-  color: var(--primary-color, #2e7d32);
+  color: #2e7d32;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -94,18 +102,20 @@
 
 .recipe-card-title {
   margin: 0 0 10px;
-  color: var(--dark-color, #18351f);
+  color: #18351f;
   font-size: 22px;
   font-weight: 700;
   line-height: 1.25;
+  text-transform: capitalize;
 }
 
 .recipe-card-time {
   margin: 0 0 20px;
-  color: var(--muted-color, #718074);
+  color: #718074;
   font-size: 15px;
 }
 
+/* Card Button */
 .recipe-card-button {
   display: inline-flex;
   align-items: center;
@@ -114,50 +124,63 @@
   min-height: 44px;
   margin-top: auto;
   padding: 0 20px;
-  border: 2px solid var(--primary-color, #2e7d32);
+  border: 2px solid #2e7d32;
   border-radius: 10px;
-  background-color: #fff;
-  color: var(--primary-color, #2e7d32);
+  background-color: #ffffff;
+  color: #2e7d32;
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;
   box-sizing: border-box;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .recipe-card-button:hover {
-  background-color: var(--primary-color, #2e7d32);
-  color: #fff;
+  background-color: #2e7d32;
+  color: #ffffff;
   transform: translateY(-1px);
 }
 
+/* Empty State */
 .no-recipes {
   grid-column: 1 / -1;
   padding: 60px 20px;
   text-align: center;
 }
 
-/* =========================
+/* =========================================================
    RESPONSIVE BREAKPOINTS
-   ========================= */
+   ========================================================= */
 
+/* Tablet View (600px - 899px) -> 2 Columns */
 @media (width >= 600px) and (width < 900px) {
   .recipe-cards > div,
   .recipe-cards-container {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 20px !important;
+    gap: 22px !important;
+  }
+
+  .recipe-card-image {
+    height: 200px;
   }
 }
 
+/* Mobile View (Below 600px) -> 1 Column */
 @media (width < 600px) {
+  .recipe-cards.block,
+  .recipe-cards {
+    padding: 20px 0 40px;
+  }
+
   .recipe-cards > div,
   .recipe-cards-container {
     grid-template-columns: 1fr !important;
     gap: 18px !important;
+  }
+
+  .recipe-card-image {
+    height: 220px;
   }
 
   .recipe-card-button {
