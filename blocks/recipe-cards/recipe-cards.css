@@ -12,15 +12,22 @@
   box-sizing: border-box;
 }
 
+/* Fix for EDS nested DOM structure */
+.recipe-cards > div,
 .recipe-cards-container {
-  display: grid;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
   width: 100%;
   margin: 0 auto;
   padding: 0;
-  /* Fixed column sizing: Ensures cards never squish below 280px */
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 32px;
   box-sizing: border-box;
+}
+
+/* Ensure intermediate EDS wrapper divs don't constrain width */
+.recipe-cards > div > div {
+  width: 100%;
+  min-width: 0;
 }
 
 /* =========================
@@ -31,6 +38,7 @@
   display: flex;
   width: 100%;
   min-width: 0;
+  height: 100%;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid var(--border-color, #d8e5d5);
@@ -71,7 +79,7 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 24px;
+  padding: 22px;
   box-sizing: border-box;
 }
 
@@ -87,10 +95,9 @@
 .recipe-card-title {
   margin: 0 0 10px;
   color: var(--dark-color, #18351f);
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   line-height: 1.25;
-  text-transform: capitalize;
 }
 
 .recipe-card-time {
@@ -134,26 +141,23 @@
   text-align: center;
 }
 
-.no-recipes h3 {
-  margin: 0 0 8px;
-  color: var(--dark-color, #18351f);
-  font-size: 24px;
-}
-
-.no-recipes p {
-  margin: 0;
-  color: var(--muted-color, #718074);
-  font-size: 16px;
-}
-
 /* =========================
    RESPONSIVE BREAKPOINTS
    ========================= */
 
-@media (width < 600px) {
+@media (width >= 600px) and (width < 900px) {
+  .recipe-cards > div,
   .recipe-cards-container {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+  }
+}
+
+@media (width < 600px) {
+  .recipe-cards > div,
+  .recipe-cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
   }
 
   .recipe-card-button {
