@@ -71,29 +71,19 @@ main > .section:has(.recipe-cards) > div,
 /* =========================================================
    CENTERED GREEN OUTLINE "VIEW MORE" BUTTON
    ========================================================= */
-
-.recipe-cards-block,
-.recipe-cards {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  width: 100% !important;
-}
+/* =========================================================
+   CENTERED GREEN OUTLINE "VIEW MORE" BUTTON
+   ========================================================= */
 
 .recipe-load-more-wrapper {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   width: 100% !important;
-  margin-top: 36px !important;
-  padding-bottom: 20px !important;
+  margin: 36px auto 20px auto !important;
   box-sizing: border-box !important;
   text-align: center !important;
-}
-
-/* Force hidden state when all recipes are visible */
-.recipe-load-more-wrapper.is-hidden {
-  display: none !important;
+  clear: both !important;
 }
 
 .recipe-load-more-btn {
@@ -102,10 +92,10 @@ main > .section:has(.recipe-cards) > div,
   justify-content: center !important;
   min-height: 48px !important;
   padding: 0 36px !important;
-  border: 2px solid var(--primary-color, #2e7d32) !important;
+  border: 2px solid #2e7d32 !important;
   border-radius: 999px !important;
   background-color: transparent !important;
-  color: var(--primary-color, #2e7d32) !important;
+  color: #2e7d32 !important;
   font-size: 15px !important;
   font-weight: 600 !important;
   cursor: pointer !important;
@@ -113,7 +103,7 @@ main > .section:has(.recipe-cards) > div,
 }
 
 .recipe-load-more-btn:hover {
-  background-color: var(--primary-color, #2e7d32) !important;
+  background-color: #2e7d32 !important;
   color: #ffffff !important;
   transform: translateY(-2px) !important;
 }

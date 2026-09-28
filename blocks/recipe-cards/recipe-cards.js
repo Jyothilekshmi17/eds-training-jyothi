@@ -31,18 +31,30 @@ export default function decorate(block) {
   const cardsContainer = document.createElement('div');
   cardsContainer.className = 'recipe-cards-container';
 
-  // Create centered "View More" button wrapper
-  const loadMoreWrapper = document.createElement('div');
-  loadMoreWrapper.className = 'recipe-load-more-wrapper';
+  // Check if wrapper already exists outside to prevent duplicate button renders
+  let loadMoreWrapper = block.parentElement?.querySelector('.recipe-load-more-wrapper');
+  let loadMoreBtn;
 
-  const loadMoreBtn = document.createElement('button');
-  loadMoreBtn.className = 'recipe-load-more-btn';
-  loadMoreBtn.textContent = 'View More Recipes';
-  loadMoreWrapper.append(loadMoreBtn);
+  if (!loadMoreWrapper) {
+    loadMoreWrapper = document.createElement('div');
+    loadMoreWrapper.className = 'recipe-load-more-wrapper';
+
+    loadMoreBtn = document.createElement('button');
+    loadMoreBtn.className = 'recipe-load-more-btn';
+    loadMoreBtn.textContent = 'View More Recipes';
+    
+    loadMoreWrapper.append(loadMoreBtn);
+  } else {
+    loadMoreBtn = loadMoreWrapper.querySelector('.recipe-load-more-btn');
+  }
 
   block.innerHTML = '';
-  // Append as direct siblings under the main block wrapper
-  block.append(cardsContainer, loadMoreWrapper);
+  block.append(cardsContainer);
+
+  // Append loadMoreWrapper OUTSIDE the block grid to allow center alignment across entire screen
+  if (block.parentElement && !block.parentElement.contains(loadMoreWrapper)) {
+    block.parentElement.appendChild(loadMoreWrapper);
+  }
 
   let currentSearch = '';
   let currentCategory = 'all';
@@ -112,7 +124,6 @@ export default function decorate(block) {
     link.textContent = 'View Recipe';
 
     content.append(category, title, time, link);
-
     card.append(imageContainer, content);
 
     return card;
@@ -147,8 +158,8 @@ export default function decorate(block) {
       message.append(heading, text);
       cardsContainer.append(message);
 
-      // Hide button if no results match
-      loadMoreWrapper.classList.add('is-hidden');
+      // FORCE HIDE when zero recipes
+      loadMoreWrapper.setAttribute('style', 'display: none !important;');
       return;
     }
 
@@ -158,29 +169,29 @@ export default function decorate(block) {
       cardsContainer.append(createCard(recipe));
     });
 
-    // Check if total items are less than or equal to currently visible amount
+    // FORCE HIDE if visible items equal or exceed total filtered items
     if (visibleCount >= filteredRecipes.length) {
-      loadMoreWrapper.classList.add('is-hidden');
+      loadMoreWrapper.setAttribute('style', 'display: none !important;');
     } else {
-      loadMoreWrapper.classList.remove('is-hidden');
+      loadMoreWrapper.setAttribute('style', 'display: flex !important; justify-content: center !important; width: 100% !important; margin-top: 36px !important;');
     }
   }
 
-  // Event listener to append next batch of 9 cards
-  loadMoreBtn.addEventListener('click', () => {
+  // Click Listener to load 9 more recipes
+  loadMoreBtn.onclick = () => {
     visibleCount += CARDS_PER_PAGE;
     renderRecipes();
-  });
+  };
 
   document.addEventListener('recipe-search', (event) => {
     currentSearch = event.detail.query;
-    visibleCount = CARDS_PER_PAGE; // Reset count on new search
+    visibleCount = CARDS_PER_PAGE;
     renderRecipes();
   });
 
   document.addEventListener('recipe-category', (event) => {
     currentCategory = event.detail.category;
-    visibleCount = CARDS_PER_PAGE; // Reset count on category change
+    visibleCount = CARDS_PER_PAGE;
     renderRecipes();
   });
 
