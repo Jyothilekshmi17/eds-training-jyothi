@@ -68,6 +68,17 @@ main > .section:has(.recipe-cards) > div,
 /* =========================================================
    CENTERED GREEN OUTLINE "VIEW MORE" BUTTON
    ========================================================= */
+/* =========================================================
+   CENTERED GREEN OUTLINE "VIEW MORE" BUTTON
+   ========================================================= */
+
+.recipe-cards-block,
+.recipe-cards {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100% !important;
+}
 
 .recipe-load-more-wrapper {
   display: flex !important;
@@ -77,6 +88,12 @@ main > .section:has(.recipe-cards) > div,
   margin-top: 36px !important;
   padding-bottom: 20px !important;
   box-sizing: border-box !important;
+  text-align: center !important;
+}
+
+/* Force hidden state when all recipes are visible */
+.recipe-load-more-wrapper.is-hidden {
+  display: none !important;
 }
 
 .recipe-load-more-btn {
@@ -104,7 +121,6 @@ main > .section:has(.recipe-cards) > div,
 .recipe-load-more-btn:active {
   transform: translateY(0) !important;
 }
-
 /* =========================================================
    RESPONSIVE LAYOUT BREAKPOINTS
    ========================================================= */
