@@ -674,4 +674,100 @@ main > .section:first-child {
   .recipe-card-button {
     width: 100%;
   }
+}/* =========================================================
+   EMERGENCY OVERRIDE FOR RECIPE CARDS LAYOUT
+   ========================================================= */
+
+/* Force all section parents to expand fully */
+main > .section:has(.recipe-cards),
+main > .section:has(.recipe-cards) > div,
+.recipe-cards-wrapper,
+.recipe-cards-container,
+.recipe-cards.block,
+.recipe-cards {
+  display: block !important;
+  width: 100% !important;
+  max-width: var(--content-width, 1100px) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Force grid layout directly on the inner wrapper containing cards */
+.recipe-cards > div,
+.recipe-cards-container {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 28px !important;
+  width: 100% !important;
+}
+
+/* Force each individual card to occupy its full grid column width */
+.recipe-cards > div > div,
+.recipe-card {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Card layout formatting */
+.recipe-card {
+  display: flex !important;
+  flex-direction: column !important;
+  border: 1px solid var(--border-color, #d8e5d5);
+  border-radius: 18px;
+  background-color: #fff;
+  box-shadow: var(--shadow, 0 6px 20px rgb(30 70 35 / 9%));
+  overflow: hidden;
+}
+
+/* Image scaling inside cards */
+.recipe-card-image {
+  width: 100% !important;
+  height: 200px !important;
+  overflow: hidden;
+}
+
+.recipe-card-image img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+/* Content area spacing */
+.recipe-card-content {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  padding: 20px !important;
+}
+
+.recipe-card-button {
+  margin-top: auto !important;
+  align-self: flex-start !important;
+  white-space: nowrap !important;
+}
+
+/* =========================================================
+   RESPONSIVE LAYOUT FOR MOBILE AND TABLET
+   ========================================================= */
+
+@media (width < 900px) {
+  .recipe-cards > div,
+  .recipe-cards-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 20px !important;
+  }
+}
+
+@media (width < 600px) {
+  .recipe-cards > div,
+  .recipe-cards-container {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  .recipe-card-button {
+    width: 100% !important;
+  }
 }
