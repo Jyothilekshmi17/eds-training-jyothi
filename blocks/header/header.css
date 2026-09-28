@@ -31,24 +31,6 @@
    LOGO
    ========================================================= */
 
-.header-logo {
-  display: inline-flex;
-  align-items: center;
-
-  gap: 10px;
-
-  color: #244d43;
-  text-decoration: none;
-
-  flex-shrink: 0;
-
-  cursor: pointer;
-}
-
-/* =========================================================
-   LEAF ICON
-   ========================================================= */
-
 .header-logo-icon {
   width: 45px;
   height: 45px;
