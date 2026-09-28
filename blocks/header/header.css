@@ -1,87 +1,29 @@
 /* =========================================================
-   RECIPE FINDER HEADER - PROFESSIONAL THEME
-   ========================================================= */
-/* =========================================================
-   FULL-WIDTH HEADER FIX
+   HEADER
    ========================================================= */
 
-/* 1. Ensure page body resets margin/padding */
-html, body {
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
-  overflow-x: hidden;
-}
-
-/* 2. Make block container force full width */
-.header-wrapper, 
-header, 
 .header {
-  width: 100vw !important;
-  max-width: 100vw !important;
-  position: relative !important;
-  left: 50% !important;
-  right: 50% !important;
-  margin-left: -50vw !important;
-  margin-right: -50vw !important;
-  background: #ffffff !important;
-  border-bottom: 1px solid #e5eadf !important;
-  box-sizing: border-box !important;
-  z-index: 1000 !important;
-}
-
-/* 3. Keep logo, nav, search, & view-toggle spaced evenly across screen */
-.header-container {
-  width: 100% !important;
-  max-width: 100% !important;
-  min-height: 80px !important;
-  margin: 0 auto !important;
-  padding: 0 40px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  box-sizing: border-box !important;
-}
-
-/* 4. Fix navigation positioning */
-.header-nav {
-  display: flex !important;
-  align-items: center !important;
-  gap: 36px !important;
-  margin-left: 40px !important;
-}
-
-/* 5. Keep search bar aligned to the right side */
-.header-search {
-  width: 280px !important;
-  height: 44px !important;
-  margin-left: auto !important;
-  display: flex !important;
-  align-items: center !important;
-  padding: 0 16px !important;
-  background: #f4f6ec !important;
-  border-radius: 28px !important;
-  box-sizing: border-box !important;
-}
-.header {
-  position: relative;
   width: 100%;
+  margin: 0;
+  padding: 0;
   background: #ffffff;
-  border-bottom: 1px solid #d8e5d5;
-  box-shadow: 0 2px 10px rgba(30, 70, 35, 0.05);
   box-sizing: border-box;
-  z-index: 1000;
 }
 
+/* =========================================================
+   HEADER CONTAINER
+   ========================================================= */
+
 .header-container {
-  width: 150%;
-  max-width: 1280px;
-  min-height: 80px;
-  margin: 0 auto;
-  padding: 0 24px;
+  width: 100%;
+  min-height: 88px;
+  padding: 0 50px;
+
   display: flex;
   align-items: center;
-  justify-content: space-between;
+
+  background: #ffffff;
+
   box-sizing: border-box;
 }
 
@@ -90,94 +32,396 @@ header,
    ========================================================= */
 
 .header-logo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 12px;
-  color: #18351f;
+
+  gap: 10px;
+
+  color: #244d43;
   text-decoration: none;
+
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+
+  cursor: pointer;
 }
 
-.header-logo:hover {
-  transform: translateY(-1px);
-}
+/* =========================================================
+   LEAF ICON
+   ========================================================= */
 
 .header-logo-icon {
-  width: 48px;
-  height: 48px;
+  width: 45px;
+  height: 45px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  flex-shrink: 0;
 }
 
 .header-logo-icon svg {
-  width: 100%;
-  height: 100%;
+  width: 45px;
+  height: 45px;
+
+  display: block;
 }
+
+/* Leaf shape */
 
 .header-logo-icon .leaf-shape {
-  fill: #2e7d32;
-  stroke: #2e7d32;
-}
-
-.header-logo-icon .leaf-line {
-  fill: none;
-  stroke: #ffffff;
-  stroke-width: 2.5;
-  stroke-linecap: round;
+  fill: #7f9f45;
+  stroke: #244d43;
+  stroke-width: 1.5;
   stroke-linejoin: round;
 }
 
+/* Leaf veins */
+
+.header-logo-icon .leaf-line {
+  fill: none;
+  stroke: #244d43;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+/* =========================================================
+   LOGO TEXT
+   ========================================================= */
+
 .header-logo-text {
-  color: #18351f;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 26px;
-  line-height: 1;
+  color: #244d43;
+
+  font-family: Arial, sans-serif;
+  font-size: 25px;
   font-weight: 700;
-  letter-spacing: -0.3px;
+
+  line-height: 1;
+
   white-space: nowrap;
 }
 
 /* =========================================================
-   NAVIGATION LINKS
+   NAVIGATION
    ========================================================= */
 
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 36px;
-  margin-left: 48px;
+
+  gap: 38px;
+
+  margin-left: auto;
+  margin-right: 25px;
 }
+
+/* Navigation links */
 
 .header-nav-link {
   position: relative;
-  padding: 28px 0;
-  color: #18351f;
+
+  display: inline-flex;
+  align-items: center;
+
+  padding: 8px 0;
+
+  color: #3f514b;
+
   font-family: Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
+
+  line-height: 1;
+
   text-decoration: none;
-  white-space: nowrap;
-  transition: color 0.2s ease;
+
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
 }
+
+/* Hover */
 
 .header-nav-link:hover {
-  color: #2e7d32;
+  color: #719b32;
+  transform: translateY(-1px);
 }
 
-/* Active Page Indicator Underline */
-.header-nav-link.active::after,
-.header-nav-link:first-child::after {
+/* Active underline */
+
+.header-nav-link::after {
   content: "";
+
   position: absolute;
+
   left: 0;
-  bottom: 18px;
-  width: 100%;
-  height: 3px;
-  background: #2e7d32;
-  border-radius: 4px;
-  transition: all 0.25s ease;
+  bottom: 0;
+
+  width: 0;
+  height: 2px;
+
+  background: #719b32;
+
+  border-radius: 5px;
+
+  transition: width 0.25s ease;
 }
 
+.header-nav-link:hover::after {
+  width: 100%;
+}
 
+/* =========================================================
+   MOBILE MENU BUTTON
+   ========================================================= */
+
+.header-menu-button {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  background: transparent;
+
+  border: none;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+/* Menu icon */
+
+.header-menu-button svg {
+  width: 27px;
+  height: 27px;
+
+  display: block;
+
+  fill: none;
+
+  stroke: #244d43;
+
+  stroke-width: 2;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+}
+
+/* Hover */
+
+.header-menu-button:hover {
+  background: #f5f7ed;
+}
+
+/* Focus */
+
+.header-menu-button:focus-visible {
+  outline: 3px solid #a7c76a;
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .header-container {
+    min-height: 82px;
+    padding: 0 30px;
+  }
+
+  .header-logo-text {
+    font-size: 23px;
+  }
+
+  .header-logo-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .header-logo-icon svg {
+    width: 42px;
+    height: 42px;
+  }
+
+  .header-nav {
+    gap: 25px;
+    margin-right: 10px;
+  }
+
+  .header-nav-link {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .header-container {
+    position: relative;
+
+    min-height: 72px;
+
+    padding: 0 20px;
+
+    justify-content: space-between;
+  }
+
+  /* Logo */
+
+  .header-logo {
+    gap: 8px;
+  }
+
+  .header-logo-icon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .header-logo-icon svg {
+    width: 38px;
+    height: 38px;
+  }
+
+  .header-logo-text {
+    font-size: 21px;
+  }
+
+  /* Show hamburger */
+
+  .header-menu-button {
+    display: flex;
+  }
+
+  /* Hide desktop navigation */
+
+  .header-nav {
+    display: none;
+
+    position: absolute;
+
+    top: 72px;
+    left: 0;
+    right: 0;
+
+    width: 100%;
+
+    margin: 0;
+
+    padding: 18px 20px 22px;
+
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 0;
+
+    background: #ffffff;
+
+    border-top: 1px solid #e5eadf;
+
+    border-bottom: 1px solid #e5eadf;
+
+    box-shadow: 0 8px 20px rgba(36, 77, 67, 0.08);
+
+    box-sizing: border-box;
+
+    z-index: 100;
+  }
+
+  /* Open mobile menu */
+
+  .header-nav.mobile-menu-open {
+    display: flex;
+  }
+
+  /* Mobile navigation links */
+
+  .header-nav-link {
+    width: 100%;
+
+    padding: 15px 5px;
+
+    color: #244d43;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    border-bottom: 1px solid #eef1ea;
+
+    box-sizing: border-box;
+  }
+
+  .header-nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .header-nav-link:hover {
+    color: #719b32;
+
+    transform: none;
+  }
+
+  .header-nav-link::after {
+    display: none;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .header-container {
+    min-height: 68px;
+
+    padding: 0 16px;
+  }
+
+  .header-logo-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .header-logo-icon svg {
+    width: 35px;
+    height: 35px;
+  }
+
+  .header-logo-text {
+    font-size: 19px;
+  }
+
+  .header-menu-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header-nav {
+    top: 68px;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.header-logo:focus-visible,
+.header-nav-link:focus-visible {
+  outline: 3px solid #a7c76a;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
