@@ -57,7 +57,7 @@ export default function decorate(block) {
   nav.className = 'header-nav';
 
   const navItems = [
-    { text: 'Home', href: '/' },
+    { text: 'Home', href: 'https://main--eds-training-jyothi--jyothilekshmi17.aem.page/' },
     { text: 'Recipes', href: '/recipes' },
     { text: 'About Us', href: 'https://main--eds-training-sinchanaamin--sinchana05-arch.aem.page/aboutus' },
     { text: 'Contact', href: '/contact' },
