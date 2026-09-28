@@ -126,7 +126,7 @@ export default function decorate(block) {
     return card;
   }
 
-  // Smooth scroll helper to bring cards into focus
+  // Smooth scroll helper
   function scrollToCards() {
     const targetOffset = cardsContainer.getBoundingClientRect().top + window.scrollY - 100;
     window.scrollTo({
@@ -189,14 +189,18 @@ export default function decorate(block) {
     currentSearch = event.detail.query;
     visibleCount = CARDS_PER_PAGE;
     renderRecipes();
-    scrollToCards(); // Auto-scrolls on search
+
+    // Only scroll if explicitly triggered by button click or Enter key
+    if (event.detail.isSubmit || event.detail.explicitSearch) {
+      scrollToCards();
+    }
   });
 
   document.addEventListener('recipe-category', (event) => {
     currentCategory = event.detail.category;
     visibleCount = CARDS_PER_PAGE;
     renderRecipes();
-    scrollToCards(); // Auto-scrolls on category change
+    scrollToCards(); // Category pill clicks scroll smoothly
   });
 
   renderRecipes();
