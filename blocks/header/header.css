@@ -1,11 +1,6 @@
-/* =========================================================
+/* =====================================================
    RECIPE FINDER HEADER
-   AEM EDGE DELIVERY SERVICES
-   ========================================================= */
-
-/* =========================================================
-   MAIN HEADER
-   ========================================================= */
+   ===================================================== */
 
 header {
   width: 100%;
@@ -23,122 +18,103 @@ header {
 /* Remove default spacing */
 header p {
   margin: 0;
-  padding: 0;
 }
 
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
+/* =====================================================
+   NAV
+   ===================================================== */
 
-.recipe-header-nav {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-/* =========================================================
-   MAIN HEADER WRAPPER
-   ========================================================= */
-
-.recipe-header-wrapper {
+header nav {
   width: 100%;
   max-width: 1500px;
 
-  height: 96px;
+  height: 100px;
 
   margin: 0 auto;
-
-  padding: 0 48px;
+  padding: 0 50px;
 
   box-sizing: border-box;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 }
 
-/* =========================================================
-   LOGO SECTION
-   ========================================================= */
+/* =====================================================
+   LOGO
+   ===================================================== */
 
-.recipe-header-brand {
+/*
+ * EDS normally puts the logo in the first section.
+ */
+
+header nav > .nav-brand,
+header nav > div:first-child {
   display: flex;
 
   align-items: center;
 
   flex-shrink: 0;
 
-  height: 96px;
-
-  margin: 0;
-  padding: 0;
+  height: 100px;
 }
 
-.recipe-header-brand a {
+/* Logo link */
+header .nav-brand a,
+header nav > div:first-child a {
   display: flex;
 
   align-items: center;
 
   height: 100%;
 
-  margin: 0;
-  padding: 0;
-
   text-decoration: none;
 }
 
-/* =========================================================
-   LOGO
-   ========================================================= */
-
-.recipe-header-logo {
+/* Logo */
+header .nav-brand img,
+header nav img {
   display: block;
 
-  width: 235px;
-
-  height: 76px;
+  width: 240px;
+  height: 78px;
 
   object-fit: contain;
 
   object-position: left center;
 
   /*
-   * Helps blend the logo's light background
-   * with the header background.
+   * Makes the light logo background
+   * blend with the header.
    */
   mix-blend-mode: multiply;
 }
 
-/* =========================================================
-   NAVIGATION SECTION
-   ========================================================= */
+/* =====================================================
+   NAVIGATION LINKS
+   ===================================================== */
 
-.recipe-header-sections {
-  display: flex;
-
-  align-items: center;
-
-  justify-content: flex-end;
-
+header .nav-sections {
   height: 100%;
 
   margin-left: auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
 }
 
-/* =========================================================
-   NAVIGATION LIST
-   ========================================================= */
-
-.recipe-header-list {
+/* Navigation list */
+header .nav-sections ul {
   display: flex;
 
   align-items: center;
 
   justify-content: flex-end;
 
-  gap: 58px;
+  gap: 55px;
 
   height: 100%;
 
@@ -148,11 +124,8 @@ header p {
   list-style: none;
 }
 
-/* =========================================================
-   NAVIGATION ITEM
-   ========================================================= */
-
-.recipe-header-item {
+/* List items */
+header .nav-sections li {
   display: flex;
 
   align-items: center;
@@ -165,26 +138,19 @@ header p {
   list-style: none;
 }
 
-/* =========================================================
-   NAVIGATION LINKS
-   ========================================================= */
-
-.recipe-header-item a {
+/* Links */
+header .nav-sections li a {
   position: relative;
 
   display: flex;
 
   align-items: center;
 
-  justify-content: center;
-
   height: 100%;
 
   padding: 0;
 
   color: #4c5d58;
-
-  font-family: var(--body-font-family);
 
   font-size: 20px;
 
@@ -197,39 +163,34 @@ header p {
   white-space: nowrap;
 
   transition:
-    color 0.2s ease,
-    transform 0.2s ease;
+    color 0.2s ease;
 }
 
-/* =========================================================
-   HOVER
-   ========================================================= */
-
-.recipe-header-item a:hover {
+/* Hover */
+header .nav-sections li a:hover {
   color: #5d9232;
 }
 
-/* =========================================================
-   ACTIVE LINK
-   ========================================================= */
+/* =====================================================
+   ACTIVE HOME
+   ===================================================== */
 
-.recipe-header-item a[aria-current='page'] {
+header .nav-sections li a[aria-current='page'] {
   color: #5d9232;
 
   font-weight: 700;
 }
 
-/* =========================================================
-   ACTIVE UNDERLINE
-   ========================================================= */
-
-.recipe-header-item a[aria-current='page']::after {
+/* Underline */
+header
+  .nav-sections
+  li
+  a[aria-current='page']::after {
   content: '';
 
   position: absolute;
 
   left: 0;
-
   right: 0;
 
   bottom: 22px;
@@ -241,47 +202,44 @@ header p {
   border-radius: 4px;
 }
 
-/* =========================================================
-   CONTACT LINK
-   ========================================================= */
+/* =====================================================
+   CONTACT
+   ===================================================== */
 
-.recipe-header-item:last-child a {
+header .nav-sections li:last-child a {
   height: auto;
 
   padding: 13px 24px;
 
-  background-color: #f0f3e3;
+  background-color: #eef2df;
 
   border-radius: 5px;
-
-  color: #4c5d58;
 }
 
 /* Contact hover */
-.recipe-header-item:last-child a:hover {
-  background-color: #e4ead4;
+header .nav-sections li:last-child a:hover {
+  background-color: #e3e9d2;
 
   color: #3f7130;
 }
 
-/* Remove underline from Contact */
-.recipe-header-item:last-child a::after {
+/* Don't show underline on Contact */
+header .nav-sections li:last-child a::after {
   display: none;
 }
 
-/* =========================================================
+/* =====================================================
    HAMBURGER
-   ========================================================= */
+   ===================================================== */
 
-.recipe-header-hamburger {
+header .nav-hamburger {
   display: none;
 
   width: 42px;
-
   height: 42px;
 
-  margin: 0;
   padding: 8px;
+  margin-left: auto;
 
   border: 0;
 
@@ -298,12 +256,10 @@ header p {
   gap: 5px;
 }
 
-/* Hamburger lines */
-.recipe-header-hamburger span {
+header .nav-hamburger span {
   display: block;
 
-  width: 24px;
-
+  width: 25px;
   height: 2px;
 
   background-color: #4f8632;
@@ -311,105 +267,76 @@ header p {
   border-radius: 2px;
 }
 
-/* =========================================================
-   LARGE DESKTOP
-   ========================================================= */
-
-@media (min-width: 1400px) {
-
-  .recipe-header-wrapper {
-    max-width: 1600px;
-
-    height: 100px;
-
-    padding-left: 60px;
-
-    padding-right: 60px;
-  }
-
-  .recipe-header-brand {
-    height: 100px;
-  }
-
-  .recipe-header-logo {
-    width: 250px;
-
-    height: 80px;
-  }
-
-  .recipe-header-list {
-    gap: 64px;
-  }
-
-  .recipe-header-item a {
-    font-size: 21px;
-  }
-}
-
-/* =========================================================
+/* =====================================================
    TABLET
-   ========================================================= */
+   ===================================================== */
 
 @media (max-width: 1100px) {
 
-  .recipe-header-wrapper {
+  header nav {
     height: 88px;
 
-    padding-left: 32px;
-
-    padding-right: 32px;
+    padding: 0 30px;
   }
 
-  .recipe-header-brand {
+  header .nav-brand {
     height: 88px;
   }
 
-  .recipe-header-logo {
+  header .nav-brand img,
+  header nav img {
     width: 210px;
 
     height: 68px;
   }
 
-  .recipe-header-list {
-    gap: 34px;
+  header .nav-sections ul {
+    gap: 32px;
   }
 
-  .recipe-header-item a {
+  header .nav-sections li a {
     font-size: 18px;
-  }
-
-  .recipe-header-item a[aria-current='page']::after {
-    bottom: 18px;
   }
 }
 
-/* =========================================================
+/* =====================================================
    MOBILE
-   ========================================================= */
+   ===================================================== */
 
 @media (max-width: 768px) {
 
-  .recipe-header-wrapper {
+  header nav {
     height: 74px;
 
-    padding-left: 20px;
+    padding: 0 20px;
 
-    padding-right: 20px;
+    position: relative;
   }
 
-  .recipe-header-brand {
+  header .nav-brand {
     height: 74px;
   }
 
-  .recipe-header-logo {
+  header .nav-brand img,
+  header nav img {
     width: 175px;
 
     height: 56px;
   }
 
-  /* Hide desktop navigation */
-  .recipe-header-sections {
+  /* Hide desktop menu */
+  header .nav-sections {
     display: none;
+  }
+
+  /* Show hamburger */
+  header .nav-hamburger {
+    display: flex;
+  }
+
+  /* Mobile menu */
+  header nav.nav-open .nav-sections {
+    display: flex;
 
     position: absolute;
 
@@ -423,7 +350,7 @@ header p {
 
     margin: 0;
 
-    padding: 12px 20px 20px;
+    padding: 15px 20px 20px;
 
     background-color: #f3f6e7;
 
@@ -432,14 +359,7 @@ header p {
     box-sizing: border-box;
   }
 
-  /* Show navigation when menu is open */
-  .recipe-header-nav.menu-open
-    .recipe-header-sections {
-    display: flex;
-  }
-
-  /* Mobile navigation list */
-  .recipe-header-list {
+  header nav.nav-open .nav-sections ul {
     width: 100%;
 
     height: auto;
@@ -451,92 +371,81 @@ header p {
     align-items: stretch;
 
     gap: 0;
-
-    margin: 0;
-
-    padding: 0;
   }
 
-  .recipe-header-item {
+  header nav.nav-open .nav-sections li {
     width: 100%;
 
     height: auto;
   }
 
-  .recipe-header-item a {
+  header nav.nav-open .nav-sections li a {
     width: 100%;
 
-    height: auto;
+    height: 48px;
 
-    min-height: 48px;
-
-    justify-content: flex-start;
-
-    padding: 10px 12px;
+    padding: 0 12px;
 
     box-sizing: border-box;
 
     font-size: 18px;
   }
 
-  /* Active underline on mobile */
-  .recipe-header-item
+  /* Mobile active underline */
+  header
+    nav.nav-open
+    .nav-sections
+    li
     a[aria-current='page']::after {
     left: 12px;
 
     right: auto;
 
-    bottom: 5px;
+    bottom: 2px;
 
     width: 35px;
 
     height: 3px;
   }
 
-  /* Contact */
-  .recipe-header-item:last-child a {
-    margin-top: 8px;
-
+  /* Mobile Contact */
+  header
+    nav.nav-open
+    .nav-sections
+    li:last-child
+    a {
     justify-content: center;
 
-    min-height: 46px;
+    margin-top: 8px;
 
-    padding: 12px 20px;
-  }
-
-  /* Show hamburger */
-  .recipe-header-hamburger {
-    display: flex;
-
-    margin-left: auto;
+    background-color: #eef2df;
   }
 }
 
-/* =========================================================
+/* =====================================================
    SMALL MOBILE
-   ========================================================= */
+   ===================================================== */
 
 @media (max-width: 480px) {
 
-  .recipe-header-wrapper {
+  header nav {
     height: 68px;
 
-    padding-left: 16px;
-
-    padding-right: 16px;
+    padding: 0 16px;
   }
 
-  .recipe-header-brand {
+  header .nav-brand {
     height: 68px;
   }
 
-  .recipe-header-logo {
+  header .nav-brand img,
+  header nav img {
     width: 155px;
 
     height: 50px;
   }
 
-  .recipe-header-sections {
+  header nav.nav-open .nav-sections {
     top: 68px;
   }
 }

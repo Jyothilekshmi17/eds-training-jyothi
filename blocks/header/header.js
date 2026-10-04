@@ -2,13 +2,8 @@ import { loadFragment } from '../fragment/fragment.js';
 import { decorateIcons } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
-  /* =====================================================
-     LOAD NAVIGATION FRAGMENT
-     ===================================================== */
-
   const navMeta = document.querySelector('meta[name="nav"]');
-
-  const navPath = navMeta?.content || '/nav';
+  const navPath = navMeta ? navMeta.content : '/nav';
 
   const fragment = await loadFragment(navPath);
 
@@ -16,176 +11,46 @@ export default async function decorate(block) {
     return;
   }
 
-  /* Clear default block content */
-  block.textContent = '';
-
-  /* =====================================================
-     CREATE HEADER NAV
-     ===================================================== */
-
+  /* Create navigation */
   const nav = document.createElement('nav');
 
-  nav.className = 'recipe-header-nav';
+  nav.id = 'nav';
 
   nav.setAttribute(
     'aria-label',
     'Main Navigation'
   );
 
-  /* =====================================================
-     CREATE HEADER CONTAINER
-     ===================================================== */
-
-  const navWrapper = document.createElement('div');
-
-  navWrapper.className = 'recipe-header-wrapper';
-
-  /* =====================================================
-     LOGO
-     ===================================================== */
-
-  const brand = document.createElement('div');
-
-  brand.className = 'recipe-header-brand';
-
-  const brandLink = document.createElement('a');
-
-  brandLink.href = '/';
-
-  brandLink.setAttribute(
-    'aria-label',
-    'Recipe Finder Home'
-  );
-
   /*
-   * Find the logo from the navigation fragment.
+   * Move the complete /nav fragment
+   * into the header.
    */
-  const logo = fragment.querySelector('img');
-
-  if (logo) {
-    const logoImage = logo.cloneNode(true);
-
-    logoImage.classList.add(
-      'recipe-header-logo'
-    );
-
-    brandLink.append(logoImage);
-  } else {
-    /*
-     * Fallback logo path.
-     *
-     * Change this path if your logo is stored somewhere else.
-     */
-    const logoImage = document.createElement('img');
-
-    logoImage.src =
-      '/icons/recipe-finder-logo.png';
-
-    logoImage.alt = 'Recipe Finder';
-
-    logoImage.className =
-      'recipe-header-logo';
-
-    brandLink.append(logoImage);
+  while (fragment.firstElementChild) {
+    nav.append(fragment.firstElementChild);
   }
 
-  brand.append(brandLink);
-
-  /* =====================================================
-     NAVIGATION LINKS
-     ===================================================== */
-
-  const navSections =
-    document.createElement('div');
-
-  navSections.className =
-    'recipe-header-sections';
-
-  const navList =
-    document.createElement('ul');
-
-  navList.className =
-    'recipe-header-list';
+  /*
+   * Clear the existing header block.
+   */
+  block.textContent = '';
 
   /*
-   * Get all links from the navigation fragment.
+   * Add navigation to header.
    */
-  const links = fragment.querySelectorAll('a');
+  block.append(nav);
 
-  links.forEach((link) => {
-    /*
-     * Don't treat the logo link as a navigation link.
-     */
-    if (link.querySelector('img')) {
-      return;
-    }
-
-    const listItem =
-      document.createElement('li');
-
-    listItem.className =
-      'recipe-header-item';
-
-    const navLink =
-      document.createElement('a');
-
-    navLink.href =
-      link.getAttribute('href') || '#';
-
-    navLink.textContent =
-      link.textContent.trim();
-
-    /*
-     * Preserve target if present.
-     */
-    if (link.target) {
-      navLink.target = link.target;
-    }
-
-    /*
-     * Mark current page.
-     */
-    const currentPath =
-      window.location.pathname.replace(
-        /\/$/,
-        ''
-      );
-
-    const linkPath =
-      new URL(
-        navLink.href,
-        window.location.origin
-      ).pathname.replace(
-        /\/$/,
-        ''
-      );
-
-    if (
-      linkPath === currentPath ||
-      (currentPath === '' && linkPath === '')
-    ) {
-      navLink.setAttribute(
-        'aria-current',
-        'page'
-      );
-    }
-
-    listItem.append(navLink);
-
-    navList.append(listItem);
-  });
-
-  navSections.append(navList);
+  /*
+   * Decorate icons if present.
+   */
+  decorateIcons(nav);
 
   /* =====================================================
-     MOBILE MENU BUTTON
+     MOBILE MENU
      ===================================================== */
 
-  const hamburger =
-    document.createElement('button');
+  const hamburger = document.createElement('button');
 
-  hamburger.className =
-    'recipe-header-hamburger';
+  hamburger.className = 'nav-hamburger';
 
   hamburger.type = 'button';
 
@@ -205,54 +70,22 @@ export default async function decorate(block) {
     <span></span>
   `;
 
-  /* =====================================================
-     BUILD HEADER
-     ===================================================== */
+  nav.append(hamburger);
 
-  navWrapper.append(
-    brand,
-    navSections,
-    hamburger
-  );
+  hamburger.addEventListener('click', () => {
+    const open =
+      nav.classList.toggle('nav-open');
 
-  nav.append(navWrapper);
+    hamburger.setAttribute(
+      'aria-expanded',
+      String(open)
+    );
 
-  block.append(nav);
-
-  /* =====================================================
-     MOBILE MENU FUNCTIONALITY
-     ===================================================== */
-
-  hamburger.addEventListener(
-    'click',
-    () => {
-      const isOpen =
-        nav.classList.contains(
-          'menu-open'
-        );
-
-      nav.classList.toggle(
-        'menu-open',
-        !isOpen
-      );
-
-      hamburger.setAttribute(
-        'aria-expanded',
-        String(!isOpen)
-      );
-
-      hamburger.setAttribute(
-        'aria-label',
-        isOpen
-          ? 'Open navigation'
-          : 'Close navigation'
-      );
-    }
-  );
-
-  /* =====================================================
-     DECORATE ICONS
-     ===================================================== */
-
-  decorateIcons(nav);
+    hamburger.setAttribute(
+      'aria-label',
+      open
+        ? 'Close navigation'
+        : 'Open navigation'
+    );
+  });
 }
