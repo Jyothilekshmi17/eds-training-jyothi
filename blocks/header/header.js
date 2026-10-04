@@ -38,7 +38,7 @@ export default function decorate(block) {
     },
     {
       text: 'About Us',
-      href: '/about-us',
+      href: 'https://main--eds-training-sinchanaamin--sinchana05-arch.aem.page/aboutus',
     },
     {
       text: 'Contact',
