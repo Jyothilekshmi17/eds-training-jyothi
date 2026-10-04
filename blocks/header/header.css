@@ -44,13 +44,21 @@
 
   flex-shrink: 0;
 
-  width: 380px;
-  height: 105px;
+  width: 360px;
+  height: 110px;
+
+  overflow: hidden;
 
   text-decoration: none;
 
   background-color: #dce8c8;
 }
+
+
+/*
+ * The original logo image contains empty space.
+ * "cover" makes the actual logo appear much larger.
+ */
 
 .header-logo-image {
   display: block;
@@ -65,8 +73,8 @@
 
   background-color: #dce8c8;
 
-  object-fit: contain;
-  object-position: left center;
+  object-fit: cover;
+  object-position: center center;
 }
 
 
@@ -123,7 +131,7 @@
 
 
 /* ========================================
-   ACTIVE HOME
+   ACTIVE LINK
    ======================================== */
 
 .header-nav-link.active {
@@ -267,13 +275,12 @@
 
   .header-container {
     min-height: 110px;
-
     padding: 0 30px;
   }
 
   .header-logo {
-    width: 340px;
-    height: 95px;
+    width: 320px;
+    height: 100px;
   }
 
   .header-nav {
@@ -294,13 +301,12 @@
 
   .header-container {
     min-height: 100px;
-
     padding: 0 25px;
   }
 
   .header-logo {
-    width: 300px;
-    height: 85px;
+    width: 290px;
+    height: 90px;
   }
 
   .header-nav {
@@ -325,13 +331,12 @@
 
   .header-container {
     min-height: 90px;
-
     padding: 0 20px;
   }
 
   .header-logo {
-    width: 250px;
-    height: 75px;
+    width: 240px;
+    height: 78px;
   }
 
   .header-nav {
@@ -360,8 +365,6 @@
     min-height: 76px;
 
     padding: 0 16px;
-
-    box-sizing: border-box;
   }
 
   .header-logo {
@@ -369,13 +372,11 @@
     height: 64px;
   }
 
-
   /* Show hamburger */
 
   .header-menu-button {
     display: flex;
   }
-
 
   /* Hide desktop navigation */
 
@@ -411,13 +412,11 @@
     box-sizing: border-box;
   }
 
-
-  /* Open mobile navigation */
+  /* Open mobile menu */
 
   .header-nav.mobile-menu-open {
     display: flex;
   }
-
 
   /* Mobile links */
 
@@ -435,15 +434,11 @@
     box-sizing: border-box;
   }
 
-
-  /* Remove underline on mobile */
-
   .header-nav-link::after {
     display: none;
   }
 
-
-  /* Mobile contact button */
+  /* Mobile contact */
 
   .header-nav-link:last-child {
     margin-top: 8px;
