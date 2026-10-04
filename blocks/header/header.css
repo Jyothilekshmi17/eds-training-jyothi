@@ -1,7 +1,8 @@
-/* =====================================================
+/* =========================================================
    RECIPE FINDER HEADER
-   ===================================================== */
+   ========================================================= */
 
+/* Main header */
 header {
   width: 100%;
   margin: 0;
@@ -12,17 +13,19 @@ header {
   border-bottom: 1px solid #e1e6d8;
 
   position: relative;
+
   z-index: 100;
 }
 
-/* Remove default spacing */
+/* Remove default paragraph spacing */
 header p {
   margin: 0;
+  padding: 0;
 }
 
-/* =====================================================
-   NAV
-   ===================================================== */
+/* =========================================================
+   NAVIGATION CONTAINER
+   ========================================================= */
 
 header nav {
   width: 100%;
@@ -36,19 +39,21 @@ header nav {
   box-sizing: border-box;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 }
 
-/* =====================================================
-   LOGO
-   ===================================================== */
+/* =========================================================
+   FIRST SECTION / LOGO
+   ========================================================= */
 
 /*
- * EDS normally puts the logo in the first section.
+ * In the EDS /nav fragment, the first section
+ * contains the logo.
  */
 
-header nav > .nav-brand,
 header nav > div:first-child {
   display: flex;
 
@@ -56,11 +61,13 @@ header nav > div:first-child {
 
   flex-shrink: 0;
 
-  height: 100px;
+  height: 100%;
+
+  margin: 0;
+  padding: 0;
 }
 
 /* Logo link */
-header .nav-brand a,
 header nav > div:first-child a {
   display: flex;
 
@@ -68,15 +75,18 @@ header nav > div:first-child a {
 
   height: 100%;
 
+  margin: 0;
+  padding: 0;
+
   text-decoration: none;
 }
 
 /* Logo */
-header .nav-brand img,
-header nav img {
+header nav > div:first-child img {
   display: block;
 
   width: 240px;
+
   height: 78px;
 
   object-fit: contain;
@@ -84,30 +94,32 @@ header nav img {
   object-position: left center;
 
   /*
-   * Makes the light logo background
-   * blend with the header.
+   * Your current logo image contains
+   * a light background.
    */
   mix-blend-mode: multiply;
 }
 
-/* =====================================================
-   NAVIGATION LINKS
-   ===================================================== */
+/* =========================================================
+   NAVIGATION SECTION
+   ========================================================= */
 
 header .nav-sections {
-  height: 100%;
-
-  margin-left: auto;
-
   display: flex;
 
   align-items: center;
 
   justify-content: flex-end;
+
+  height: 100%;
+
+  margin-left: auto;
+
+  padding: 0;
 }
 
 /* Navigation list */
-header .nav-sections ul {
+header .nav-sections > ul {
   display: flex;
 
   align-items: center;
@@ -119,13 +131,14 @@ header .nav-sections ul {
   height: 100%;
 
   margin: 0;
+
   padding: 0;
 
   list-style: none;
 }
 
-/* List items */
-header .nav-sections li {
+/* Navigation items */
+header .nav-sections > ul > li {
   display: flex;
 
   align-items: center;
@@ -133,24 +146,29 @@ header .nav-sections li {
   height: 100%;
 
   margin: 0;
+
   padding: 0;
 
   list-style: none;
 }
 
-/* Links */
-header .nav-sections li a {
+/* Navigation links */
+header .nav-sections > ul > li > a {
   position: relative;
 
   display: flex;
 
   align-items: center;
 
+  justify-content: center;
+
   height: 100%;
+
+  margin: 0;
 
   padding: 0;
 
-  color: #4c5d58;
+  color: #4d5d58;
 
   font-size: 20px;
 
@@ -167,33 +185,39 @@ header .nav-sections li a {
 }
 
 /* Hover */
-header .nav-sections li a:hover {
+header .nav-sections > ul > li > a:hover {
   color: #5d9232;
 }
 
-/* =====================================================
+/* =========================================================
    ACTIVE HOME
-   ===================================================== */
+   ========================================================= */
 
-header .nav-sections li a[aria-current='page'] {
+header
+  .nav-sections
+  > ul
+  > li
+  > a[aria-current='page'] {
   color: #5d9232;
 
   font-weight: 700;
 }
 
-/* Underline */
+/* Active underline */
 header
   .nav-sections
-  li
-  a[aria-current='page']::after {
+  > ul
+  > li
+  > a[aria-current='page']::after {
   content: '';
 
   position: absolute;
 
   left: 0;
+
   right: 0;
 
-  bottom: 22px;
+  bottom: 21px;
 
   height: 4px;
 
@@ -202,11 +226,15 @@ header
   border-radius: 4px;
 }
 
-/* =====================================================
-   CONTACT
-   ===================================================== */
+/* =========================================================
+   CONTACT BUTTON
+   ========================================================= */
 
-header .nav-sections li:last-child a {
+header
+  .nav-sections
+  > ul
+  > li:last-child
+  > a {
   height: auto;
 
   padding: 13px 24px;
@@ -217,29 +245,39 @@ header .nav-sections li:last-child a {
 }
 
 /* Contact hover */
-header .nav-sections li:last-child a:hover {
-  background-color: #e3e9d2;
+header
+  .nav-sections
+  > ul
+  > li:last-child
+  > a:hover {
+  background-color: #e4ead5;
 
   color: #3f7130;
 }
 
-/* Don't show underline on Contact */
-header .nav-sections li:last-child a::after {
+/* No underline for contact */
+header
+  .nav-sections
+  > ul
+  > li:last-child
+  > a::after {
   display: none;
 }
 
-/* =====================================================
+/* =========================================================
    HAMBURGER
-   ===================================================== */
+   ========================================================= */
 
 header .nav-hamburger {
   display: none;
 
   width: 42px;
+
   height: 42px;
 
-  padding: 8px;
   margin-left: auto;
+
+  padding: 8px;
 
   border: 0;
 
@@ -260,6 +298,7 @@ header .nav-hamburger span {
   display: block;
 
   width: 25px;
+
   height: 2px;
 
   background-color: #4f8632;
@@ -267,9 +306,9 @@ header .nav-hamburger span {
   border-radius: 2px;
 }
 
-/* =====================================================
+/* =========================================================
    TABLET
-   ===================================================== */
+   ========================================================= */
 
 @media (max-width: 1100px) {
 
@@ -279,29 +318,28 @@ header .nav-hamburger span {
     padding: 0 30px;
   }
 
-  header .nav-brand {
-    height: 88px;
-  }
-
-  header .nav-brand img,
-  header nav img {
+  header nav > div:first-child img {
     width: 210px;
 
     height: 68px;
   }
 
-  header .nav-sections ul {
+  header .nav-sections > ul {
     gap: 32px;
   }
 
-  header .nav-sections li a {
+  header
+    .nav-sections
+    > ul
+    > li
+    > a {
     font-size: 18px;
   }
 }
 
-/* =====================================================
+/* =========================================================
    MOBILE
-   ===================================================== */
+   ========================================================= */
 
 @media (max-width: 768px) {
 
@@ -313,18 +351,13 @@ header .nav-hamburger span {
     position: relative;
   }
 
-  header .nav-brand {
-    height: 74px;
-  }
-
-  header .nav-brand img,
-  header nav img {
+  header nav > div:first-child img {
     width: 175px;
 
     height: 56px;
   }
 
-  /* Hide desktop menu */
+  /* Hide normal menu */
   header .nav-sections {
     display: none;
   }
@@ -334,7 +367,7 @@ header .nav-hamburger span {
     display: flex;
   }
 
-  /* Mobile menu */
+  /* Open mobile menu */
   header nav.nav-open .nav-sections {
     display: flex;
 
@@ -359,7 +392,10 @@ header .nav-hamburger span {
     box-sizing: border-box;
   }
 
-  header nav.nav-open .nav-sections ul {
+  header
+    nav.nav-open
+    .nav-sections
+    > ul {
     width: 100%;
 
     height: auto;
@@ -373,16 +409,27 @@ header .nav-hamburger span {
     gap: 0;
   }
 
-  header nav.nav-open .nav-sections li {
+  header
+    nav.nav-open
+    .nav-sections
+    > ul
+    > li {
     width: 100%;
 
     height: auto;
   }
 
-  header nav.nav-open .nav-sections li a {
+  header
+    nav.nav-open
+    .nav-sections
+    > ul
+    > li
+    > a {
     width: 100%;
 
     height: 48px;
+
+    justify-content: flex-start;
 
     padding: 0 12px;
 
@@ -391,29 +438,31 @@ header .nav-hamburger span {
     font-size: 18px;
   }
 
-  /* Mobile active underline */
+  /* Active mobile underline */
   header
     nav.nav-open
     .nav-sections
-    li
-    a[aria-current='page']::after {
+    > ul
+    > li
+    > a[aria-current='page']::after {
     left: 12px;
 
     right: auto;
 
-    bottom: 2px;
+    bottom: 3px;
 
     width: 35px;
 
     height: 3px;
   }
 
-  /* Mobile Contact */
+  /* Contact */
   header
     nav.nav-open
     .nav-sections
-    li:last-child
-    a {
+    > ul
+    > li:last-child
+    > a {
     justify-content: center;
 
     margin-top: 8px;
@@ -422,9 +471,9 @@ header .nav-hamburger span {
   }
 }
 
-/* =====================================================
+/* =========================================================
    SMALL MOBILE
-   ===================================================== */
+   ========================================================= */
 
 @media (max-width: 480px) {
 
@@ -434,12 +483,7 @@ header .nav-hamburger span {
     padding: 0 16px;
   }
 
-  header .nav-brand {
-    height: 68px;
-  }
-
-  header .nav-brand img,
-  header nav img {
+  header nav > div:first-child img {
     width: 155px;
 
     height: 50px;

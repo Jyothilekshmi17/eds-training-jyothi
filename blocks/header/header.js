@@ -3,7 +3,10 @@ import { decorateIcons } from '../../scripts/aem.js';
 
 export default async function decorate(block) {
   const navMeta = document.querySelector('meta[name="nav"]');
-  const navPath = navMeta ? navMeta.content : '/nav';
+
+  const navPath = navMeta
+    ? navMeta.content
+    : '/nav';
 
   const fragment = await loadFragment(navPath);
 
@@ -11,43 +14,44 @@ export default async function decorate(block) {
     return;
   }
 
-  /* Create navigation */
+  /*
+   * Create navigation element.
+   */
   const nav = document.createElement('nav');
 
   nav.id = 'nav';
 
   nav.setAttribute(
     'aria-label',
-    'Main Navigation'
+    'Main Navigation',
   );
 
   /*
    * Move the complete /nav fragment
-   * into the header.
+   * into the navigation element.
    */
   while (fragment.firstElementChild) {
     nav.append(fragment.firstElementChild);
   }
 
   /*
-   * Clear the existing header block.
+   * Clear the original header block.
    */
   block.textContent = '';
 
   /*
-   * Add navigation to header.
+   * Add the navigation.
    */
   block.append(nav);
 
   /*
-   * Decorate icons if present.
+   * Decorate any icons used in the navigation.
    */
-  decorateIcons(nav);
+  decorateIcons(block);
 
-  /* =====================================================
-     MOBILE MENU
-     ===================================================== */
-
+  /*
+   * Mobile menu button.
+   */
   const hamburger = document.createElement('button');
 
   hamburger.className = 'nav-hamburger';
@@ -56,12 +60,12 @@ export default async function decorate(block) {
 
   hamburger.setAttribute(
     'aria-label',
-    'Open navigation'
+    'Open navigation',
   );
 
   hamburger.setAttribute(
     'aria-expanded',
-    'false'
+    'false',
   );
 
   hamburger.innerHTML = `
@@ -72,20 +76,22 @@ export default async function decorate(block) {
 
   nav.append(hamburger);
 
+  /*
+   * Mobile menu interaction.
+   */
   hamburger.addEventListener('click', () => {
-    const open =
-      nav.classList.toggle('nav-open');
+    const isOpen = nav.classList.toggle('nav-open');
 
     hamburger.setAttribute(
       'aria-expanded',
-      String(open)
+      String(isOpen),
     );
 
     hamburger.setAttribute(
       'aria-label',
-      open
+      isOpen
         ? 'Close navigation'
-        : 'Open navigation'
+        : 'Open navigation',
     );
   });
 }
