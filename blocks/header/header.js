@@ -30,7 +30,7 @@ export default function decorate(block) {
   const navItems = [
     {
       text: 'Home',
-      href: '/',
+      href: 'https://main--eds-training-jyothi--jyothilekshmi17.aem.page/',
     },
     {
       text: 'Recipes',
