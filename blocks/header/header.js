@@ -34,7 +34,7 @@ export default function decorate(block) {
     },
     {
       text: 'Recipes',
-      href: '/recipes',
+      href: 'https://main--eds-training-jyothi--jyothilekshmi17.aem.page/',
     },
     {
       text: 'About Us',
@@ -42,7 +42,7 @@ export default function decorate(block) {
     },
     {
       text: 'Contact',
-      href: '/contact',
+      href: 'https://main--eds-training-jyothi--jyothilekshmi17.aem.page/contact',
     },
   ];
 
