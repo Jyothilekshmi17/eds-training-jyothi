@@ -1,88 +1,137 @@
-export default function decorate(block) {
-  // Header container
-  const container = document.createElement('div');
-  container.className = 'header-container';
+import { loadFragment } from '../fragment/fragment.js';
+import { decorateIcons } from '../../scripts/aem.js';
 
-  // Logo
-  const logo = document.createElement('a');
-  logo.className = 'header-logo';
-  logo.href = '/';
-  logo.setAttribute('aria-label', 'Recipe Finder Home');
+export default async function decorate(block) {
+  const navMeta = document.querySelector('meta[name="nav"]');
 
-  const logoImage = document.createElement('img');
-  logoImage.className = 'header-logo-image';
-  logoImage.src = '/icons/recipe-finder-logo.png';
-  logoImage.alt = 'Recipe Finder';
+  const navPath = navMeta
+    ? navMeta.content
+    : '/nav';
 
-  logo.appendChild(logoImage);
+  const fragment = await loadFragment(navPath);
 
-  // Navigation
+  if (!fragment) {
+    return;
+  }
+
+  block.textContent = '';
+
   const nav = document.createElement('nav');
-  nav.className = 'header-nav';
-  nav.setAttribute('aria-label', 'Main navigation');
+  nav.id = 'nav';
+  nav.setAttribute('aria-label', 'Main Navigation');
 
-  const navItems = [
-    { text: 'Home', href: '/' },
-    { text: 'Recipes', href: '/recipes' },
-    { text: 'About Us', href: '/about-us' },
-    { text: 'Contact', href: '/contact' },
-  ];
+  const navWrapper = document.createElement('div');
+  navWrapper.className = 'nav-wrapper';
 
-  const currentPath =
-    window.location.pathname.replace(/\/$/, '') || '/';
+  /* ------------------------------------------------------
+     Logo
+     ------------------------------------------------------ */
 
-  navItems.forEach(({ text, href }) => {
-    const link = document.createElement('a');
-    link.className = 'header-nav-link';
-    link.href = href;
-    link.textContent = text;
+  const brand = document.createElement('div');
+  brand.className = 'nav-brand';
 
-    const linkPath = href.replace(/\/$/, '') || '/';
+  const brandContent = fragment.querySelector(
+    '.nav-brand, picture, img'
+  );
 
-    if (currentPath === linkPath) {
-      link.classList.add('active');
-      link.setAttribute('aria-current', 'page');
+  if (brandContent) {
+    if (brandContent.closest('.nav-brand')) {
+      brand.append(brandContent.closest('.nav-brand').cloneNode(true));
+    } else {
+      const link = document.createElement('a');
+      link.href = '/';
+
+      if (brandContent.tagName === 'IMG') {
+        link.append(brandContent.cloneNode(true));
+      } else {
+        link.append(brandContent.cloneNode(true));
+      }
+
+      brand.append(link);
     }
+  }
 
-    nav.appendChild(link);
-  });
+  /* ------------------------------------------------------
+     Navigation
+     ------------------------------------------------------ */
 
-  // Mobile menu button
-  const menuButton = document.createElement('button');
-  menuButton.type = 'button';
-  menuButton.className = 'header-menu-button';
-  menuButton.setAttribute('aria-label', 'Open menu');
-  menuButton.setAttribute('aria-expanded', 'false');
+  const sections = document.createElement('div');
+  sections.className = 'nav-sections';
 
-  const renderMenuIcon = (isOpen) => {
-    menuButton.innerHTML = isOpen
-      ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5L19 19M19 5L5 19"/></svg>'
-      : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6H20M4 12H20M4 18H20"/></svg>';
+  const sourceSections = fragment.querySelector('.nav-sections');
 
-    menuButton.setAttribute(
-      'aria-label',
-      isOpen ? 'Close menu' : 'Open menu',
+  if (sourceSections) {
+    sections.innerHTML = sourceSections.innerHTML;
+  } else {
+    const links = fragment.querySelectorAll('a');
+
+    const ul = document.createElement('ul');
+
+    links.forEach((link) => {
+      const li = document.createElement('li');
+      li.append(link.cloneNode(true));
+      ul.append(li);
+    });
+
+    sections.append(ul);
+  }
+
+  /* ------------------------------------------------------
+     Hamburger
+     ------------------------------------------------------ */
+
+  const hamburger = document.createElement('div');
+  hamburger.className = 'nav-hamburger';
+
+  const button = document.createElement('button');
+
+  button.type = 'button';
+  button.setAttribute('aria-label', 'Open navigation');
+  button.setAttribute('aria-expanded', 'false');
+
+  const icon = document.createElement('span');
+  icon.className = 'nav-hamburger-icon';
+
+  button.append(icon);
+  hamburger.append(button);
+
+  /* ------------------------------------------------------
+     Build Header
+     ------------------------------------------------------ */
+
+  navWrapper.append(
+    brand,
+    sections,
+    hamburger
+  );
+
+  nav.append(navWrapper);
+  block.append(nav);
+
+  /* ------------------------------------------------------
+     Mobile Menu
+     ------------------------------------------------------ */
+
+  button.addEventListener('click', () => {
+    const expanded = button.getAttribute('aria-expanded') === 'true';
+
+    button.setAttribute(
+      'aria-expanded',
+      String(!expanded)
     );
 
-    menuButton.setAttribute('aria-expanded', String(isOpen));
-  };
+    nav.classList.toggle('nav-open', !expanded);
 
-  renderMenuIcon(false);
-
-  menuButton.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('mobile-menu-open');
-    renderMenuIcon(isOpen);
+    if (!expanded) {
+      sections.style.display = 'flex';
+    } else {
+      sections.style.display = '';
+    }
   });
 
-  nav.querySelectorAll('.header-nav-link').forEach((link) => {
-    link.addEventListener('click', () => {
-      nav.classList.remove('mobile-menu-open');
-      renderMenuIcon(false);
-    });
-  });
+  /* ------------------------------------------------------
+     Icons
+     ------------------------------------------------------ */
 
-  // Assemble header
-  container.append(logo, nav, menuButton);
-
-  block.replaceChildren(container);
+  decorateIcons(nav);
 }
