@@ -1,242 +1,88 @@
 export default function decorate(block) {
-  /*
-   * ============================================
-   * HEADER CONTAINER
-   * ============================================
-   */
+  // Header container
+  const container = document.createElement('div');
+  container.className = 'header-container';
 
-  const headerContainer = document.createElement('div');
-  headerContainer.className = 'header-container';
-
-  /*
-   * ============================================
-   * LOGO
-   * ============================================
-   */
-
+  // Logo
   const logo = document.createElement('a');
   logo.className = 'header-logo';
   logo.href = '/';
   logo.setAttribute('aria-label', 'Recipe Finder Home');
 
-  /*
-   * Leaf icon
-   */
+  const logoImage = document.createElement('img');
+  logoImage.className = 'header-logo-image';
+  logoImage.src = '/icons/recipe-finder-logo.png';
+  logoImage.alt = 'Recipe Finder';
 
-  const logoIcon = document.createElement('span');
-  logoIcon.className = 'header-logo-icon';
+  logo.appendChild(logoImage);
 
-  logoIcon.innerHTML = `
-    <svg
-      viewBox="0 0 60 60"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path
-        class="leaf-shape"
-        d="M12 43C10 27 17 12 43 7C47 29 37 47 19 51C16 49 14 46 12 43Z"
-      ></path>
-
-      <path
-        class="leaf-line"
-        d="M14 48C23 38 31 28 39 17"
-      ></path>
-
-      <path
-        class="leaf-line"
-        d="M22 38L18 27"
-      ></path>
-
-      <path
-        class="leaf-line"
-        d="M27 32L39 31"
-      ></path>
-
-      <path
-        class="leaf-line"
-        d="M32 25L29 17"
-      ></path>
-    </svg>
-  `;
-
-  /*
-   * Logo text
-   */
-
-  const logoText = document.createElement('span');
-  logoText.className = 'header-logo-text';
-  logoText.textContent = 'Recipe Finder';
-
-  logo.appendChild(logoIcon);
-  logo.appendChild(logoText);
-
-  /*
-   * ============================================
-   * NAVIGATION
-   * ============================================
-   */
-
+  // Navigation
   const nav = document.createElement('nav');
   nav.className = 'header-nav';
   nav.setAttribute('aria-label', 'Main navigation');
 
   const navItems = [
-    {
-      text: 'Home',
-      href: 'https://main--eds-training-jyothi--jyothilekshmi17.aem.live/',
-    },
-    {
-      text: 'Recipes',
-      href: '/recipes',
-    },
-    {
-      text: 'About Us',
-      href: 'https://main--eds-training-sinchanaamin--sinchana05-arch.aem.page/aboutus',
-    },
-    {
-      text: 'Contact',
-      href: '/contact',
-    },
+    { text: 'Home', href: '/' },
+    { text: 'Recipes', href: '/recipes' },
+    { text: 'About Us', href: '/about-us' },
+    { text: 'Contact', href: '/contact' },
   ];
 
-  navItems.forEach((item) => {
-    const link = document.createElement('a');
+  const currentPath =
+    window.location.pathname.replace(/\/$/, '') || '/';
 
+  navItems.forEach(({ text, href }) => {
+    const link = document.createElement('a');
     link.className = 'header-nav-link';
-    link.href = item.href;
-    link.textContent = item.text;
+    link.href = href;
+    link.textContent = text;
+
+    const linkPath = href.replace(/\/$/, '') || '/';
+
+    if (currentPath === linkPath) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    }
 
     nav.appendChild(link);
   });
 
-  /*
-   * ============================================
-   * MOBILE MENU BUTTON
-   * ============================================
-   */
-
+  // Mobile menu button
   const menuButton = document.createElement('button');
-
   menuButton.type = 'button';
   menuButton.className = 'header-menu-button';
-
   menuButton.setAttribute('aria-label', 'Open menu');
   menuButton.setAttribute('aria-expanded', 'false');
 
-  menuButton.innerHTML = `
-    <svg
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M4 6H20"></path>
-      <path d="M4 12H20"></path>
-      <path d="M4 18H20"></path>
-    </svg>
-  `;
-
-  /*
-   * ============================================
-   * MOBILE MENU FUNCTIONALITY
-   * ============================================
-   */
-
-  menuButton.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('mobile-menu-open');
-
-    menuButton.setAttribute(
-      'aria-expanded',
-      isOpen ? 'true' : 'false',
-    );
+  const renderMenuIcon = (isOpen) => {
+    menuButton.innerHTML = isOpen
+      ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5L19 19M19 5L5 19"/></svg>'
+      : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6H20M4 12H20M4 18H20"/></svg>';
 
     menuButton.setAttribute(
       'aria-label',
       isOpen ? 'Close menu' : 'Open menu',
     );
 
-    /*
-     * Change hamburger icon to X
-     */
+    menuButton.setAttribute('aria-expanded', String(isOpen));
+  };
 
-    if (isOpen) {
-      menuButton.innerHTML = `
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path d="M5 5L19 19"></path>
-          <path d="M19 5L5 19"></path>
-        </svg>
-      `;
-    } else {
-      menuButton.innerHTML = `
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path d="M4 6H20"></path>
-          <path d="M4 12H20"></path>
-          <path d="M4 18H20"></path>
-        </svg>
-      `;
-    }
+  renderMenuIcon(false);
+
+  menuButton.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('mobile-menu-open');
+    renderMenuIcon(isOpen);
   });
-
-  /*
-   * ============================================
-   * CLOSE MOBILE MENU AFTER CLICKING A LINK
-   * ============================================
-   */
 
   nav.querySelectorAll('.header-nav-link').forEach((link) => {
     link.addEventListener('click', () => {
       nav.classList.remove('mobile-menu-open');
-
-      menuButton.setAttribute(
-        'aria-expanded',
-        'false',
-      );
-
-      menuButton.setAttribute(
-        'aria-label',
-        'Open menu',
-      );
-
-      menuButton.innerHTML = `
-        <svg
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path d="M4 6H20"></path>
-          <path d="M4 12H20"></path>
-          <path d="M4 18H20"></path>
-        </svg>
-      `;
+      renderMenuIcon(false);
     });
   });
 
-  /*
-   * ============================================
-   * BUILD HEADER
-   * ============================================
-   */
+  // Assemble header
+  container.append(logo, nav, menuButton);
 
-  headerContainer.appendChild(logo);
-  headerContainer.appendChild(nav);
-  headerContainer.appendChild(menuButton);
-
-  /*
-   * Remove existing block content
-   */
-
-  block.innerHTML = '';
-
-  /*
-   * Add new header
-   */
-
-  block.appendChild(headerContainer);
+  block.replaceChildren(container);
 }
