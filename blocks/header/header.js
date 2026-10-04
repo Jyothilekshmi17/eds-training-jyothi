@@ -1,97 +1,88 @@
-import { loadFragment } from '../fragment/fragment.js';
-import { decorateIcons } from '../../scripts/aem.js';
+export default function decorate(block) {
+  // Header container
+  const container = document.createElement('div');
+  container.className = 'header-container';
 
-export default async function decorate(block) {
-  const navMeta = document.querySelector('meta[name="nav"]');
+  // Logo
+  const logo = document.createElement('a');
+  logo.className = 'header-logo';
+  logo.href = '/';
+  logo.setAttribute('aria-label', 'Recipe Finder Home');
 
-  const navPath = navMeta
-    ? navMeta.content
-    : '/nav';
+  const logoImage = document.createElement('img');
+  logoImage.className = 'header-logo-image';
+  logoImage.src = '/icons/recipe-finder-logo.png';
+  logoImage.alt = 'Recipe Finder';
 
-  const fragment = await loadFragment(navPath);
+  logo.appendChild(logoImage);
 
-  if (!fragment) {
-    return;
-  }
-
-  /*
-   * Create navigation element.
-   */
+  // Navigation
   const nav = document.createElement('nav');
+  nav.className = 'header-nav';
+  nav.setAttribute('aria-label', 'Main navigation');
 
-  nav.id = 'nav';
+  const navItems = [
+    { text: 'Home', href: '/' },
+    { text: 'Recipes', href: '/recipes' },
+    { text: 'About Us', href: '/about-us' },
+    { text: 'Contact', href: '/contact' },
+  ];
 
-  nav.setAttribute(
-    'aria-label',
-    'Main Navigation',
-  );
+  const currentPath =
+    window.location.pathname.replace(/\/$/, '') || '/';
 
-  /*
-   * Move the complete /nav fragment
-   * into the navigation element.
-   */
-  while (fragment.firstElementChild) {
-    nav.append(fragment.firstElementChild);
-  }
+  navItems.forEach(({ text, href }) => {
+    const link = document.createElement('a');
+    link.className = 'header-nav-link';
+    link.href = href;
+    link.textContent = text;
 
-  /*
-   * Clear the original header block.
-   */
-  block.textContent = '';
+    const linkPath = href.replace(/\/$/, '') || '/';
 
-  /*
-   * Add the navigation.
-   */
-  block.append(nav);
+    if (currentPath === linkPath) {
+      link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
+    }
 
-  /*
-   * Decorate any icons used in the navigation.
-   */
-  decorateIcons(block);
-
-  /*
-   * Mobile menu button.
-   */
-  const hamburger = document.createElement('button');
-
-  hamburger.className = 'nav-hamburger';
-
-  hamburger.type = 'button';
-
-  hamburger.setAttribute(
-    'aria-label',
-    'Open navigation',
-  );
-
-  hamburger.setAttribute(
-    'aria-expanded',
-    'false',
-  );
-
-  hamburger.innerHTML = `
-    <span></span>
-    <span></span>
-    <span></span>
-  `;
-
-  nav.append(hamburger);
-
-  /*
-   * Mobile menu interaction.
-   */
-  hamburger.addEventListener('click', () => {
-    const isOpen = nav.classList.toggle('nav-open');
-
-    hamburger.setAttribute(
-      'aria-expanded',
-      String(isOpen),
-    );
-
-    hamburger.setAttribute(
-      'aria-label',
-      isOpen
-        ? 'Close navigation'
-        : 'Open navigation',
-    );
+    nav.appendChild(link);
   });
+
+  // Mobile menu button
+  const menuButton = document.createElement('button');
+  menuButton.type = 'button';
+  menuButton.className = 'header-menu-button';
+  menuButton.setAttribute('aria-label', 'Open menu');
+  menuButton.setAttribute('aria-expanded', 'false');
+
+  const renderMenuIcon = (isOpen) => {
+    menuButton.innerHTML = isOpen
+      ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5L19 19M19 5L5 19"/></svg>'
+      : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6H20M4 12H20M4 18H20"/></svg>';
+
+    menuButton.setAttribute(
+      'aria-label',
+      isOpen ? 'Close menu' : 'Open menu',
+    );
+
+    menuButton.setAttribute('aria-expanded', String(isOpen));
+  };
+
+  renderMenuIcon(false);
+
+  menuButton.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('mobile-menu-open');
+    renderMenuIcon(isOpen);
+  });
+
+  nav.querySelectorAll('.header-nav-link').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('mobile-menu-open');
+      renderMenuIcon(false);
+    });
+  });
+
+  // Assemble header
+  container.append(logo, nav, menuButton);
+
+  block.replaceChildren(container);
 }
